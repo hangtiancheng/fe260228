@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@plugin "daisyui";
+
+@keyframes word-marquee-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes word-marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Override daisyUI input/textarea focus styles to use 1px orange border */
+.input:focus,
+.input:focus-within,
+.textarea:focus,
+.textarea:focus-within {
+  @apply border-(--color-primary) shadow-none outline-none;
+}
