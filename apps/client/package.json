@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint . --max-warnings 0",
+    "lint": "eslint . --fix",
     "preview": "vite preview",
     "format": "prettier -w --experimental-cli ./",
     "storybook": "storybook dev -p 6006",

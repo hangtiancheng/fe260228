@@ -10,12 +10,12 @@
     "prettier-plugin-tailwindcss": "^0.7.4"
   },
   "scripts": {
-    "web:dev": "pnpm --filter @fe26/web dev",
+    "client:dev": "pnpm --filter @fe26/client dev",
     "server:dev": "pnpm --filter @fe26/server dev",
-    "dev": "concurrently \"pnpm web:dev\" \"pnpm server:dev\"",
-    "web:format": "pnpm --filter @fe26/web format",
+    "dev": "concurrently \"pnpm client:dev\" \"pnpm server:dev\"",
+    "client:format": "pnpm --filter @fe26/client format",
     "server:format": "pnpm --filter @fe26/server format",
-    "format": "concurrently \"pnpm web:format\" \"pnpm server:format\"",
+    "format": "concurrently \"pnpm client:format\" \"pnpm server:format\"",
     "git:commit": "git add -A && git commit -m \"feat: Introduce new features\"",
     "git:push": "pnpm git:commit && git push origin main"
   }
