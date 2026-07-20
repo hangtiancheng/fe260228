@@ -29,3 +29,12 @@
 .textarea:focus-within {
   @apply border-(--color-primary) shadow-none outline-none;
 }
+
+:root {
+  --font-sans:
+    "Geist Mono", "Swifty", "Maple Mono", "Menlo", "Cascadia Code",
+    "PingFang SC", "Microsoft YaHei", monospace !important;
+  --font-mono: var(--font-sans);
+
+  font-family: var(--font-sans);
+}
