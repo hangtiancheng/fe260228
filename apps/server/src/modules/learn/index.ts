@@ -16,7 +16,7 @@ learnRouter.get("/word/:id", authMiddleware, withPrisma, async (c) => {
   const id = c.req.param("id");
   const result = await findLearningWords(prisma, user.userId, id);
   if (!result.allowed) {
-    return c.json(error(null, "Invalid request or course not purchased", 403));
+    return c.json(error(null, "Course not found", 404));
   }
 
   c.var.logger.info(

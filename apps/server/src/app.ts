@@ -4,7 +4,6 @@ import { pinoLogger } from "hono-pino";
 import aiRouter from "./modules/ai/index.js";
 import courseRouter from "./modules/course/index.js";
 import learnRouter from "./modules/learn/index.js";
-import payRouter from "./modules/pay/index.js";
 import trackerRouter from "./modules/tracker/index.js";
 import userRouter from "./modules/user/index.js";
 import wordBookRouter from "./modules/word-book/index.js";
@@ -60,7 +59,6 @@ export const createApp = (options: AppOptions = {}) => {
   app.route("/ai/v1", aiRouter);
   app.route("/api/v1/course", courseRouter);
   app.route("/api/v1/learn", learnRouter);
-  app.route("/api/v1/pay", payRouter);
   app.route("/api/v1/tracker", trackerRouter);
 
   app.notFound((c) => c.json(error(null, "not found", 404), 404));

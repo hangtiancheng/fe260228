@@ -11,10 +11,8 @@ const booleanEnvSchema = z
   .default("0")
   .transform((value) => value === "1" || value === "true");
 
-export const aiProviderSchema = z.enum(["deepseek", "ollama"]);
+export const aiProviderSchema = z.enum(["openai", "ollama"]);
 
-const requiredAlipayCredentialMessage =
-  "Alipay credentials are required when ALIPAY_ENABLED=true";
 const requiredEmailCredentialMessage =
   "Email credentials are required when EMAIL_ENABLED=true";
 
@@ -34,13 +32,13 @@ const envSchema = z
     MINIO_PORT: z.coerce.number().int().positive().default(9000),
     MINIO_USE_SSL: booleanEnvSchema,
     MINIO_BUCKET: z.string().min(1).default("bucket"),
-    AI_PROVIDER: aiProviderSchema.default("deepseek"),
-    DEEPSEEK_API_KEY: z.string().default(""),
-    DEEPSEEK_API_MODEL: z.string().default("deepseek-chat"),
-    DEEPSEEK_REASONER_API_MODEL: z.string().default("deepseek-reasoner"),
+    AI_PROVIDER: aiProviderSchema.default("openai"),
+    OPENAI_API_KEY: z.string().default(""),
+    OPENAI_API_MODEL: z.string().default("openai-chat"),
+    OPENAI_REASONER_API_MODEL: z.string().default("openai-reasoner"),
     OLLAMA_BASE_URL: z.url().default("http://127.0.0.1:11434"),
     OLLAMA_MODEL: z.string().min(1).default("qwen3.5"),
-    OLLAMA_REASONER_MODEL: z.string().default("deepseek-r1"),
+    OLLAMA_REASONER_MODEL: z.string().default("openai-r1"),
     BOCHA_ENABLED: booleanEnvSchema,
     BOCHA_SEARCH_URL: z.string().default(""),
     BOCHA_API_KEY: z.string().default(""),
@@ -54,13 +52,6 @@ const envSchema = z
     EMAIL_USER: z.string().default(""),
     EMAIL_PASSWORD: z.string().default(""),
     EMAIL_FROM: z.string().default(""),
-    ALIPAY_ENABLED: booleanEnvSchema,
-    ALIPAY_APP_ID: z.string().default(""),
-    ALIPAY_PRIVATE_KEY: z.string().default(""),
-    ALIPAY_PUBLIC_KEY: z.string().default(""),
-    ALIPAY_GATEWAY: z.url().default("https://openapi.alipay.com/gateway.do"),
-    ALIPAY_NOTIFY_URL: z.url().default("http://localhost:3000"),
-    PAYMENT_NOTIFY_SECRET: z.string().default(""),
   })
   .superRefine((value, ctx) => {
     if (value.EMAIL_ENABLED && value.EMAIL_HOST.length === 0) {
@@ -92,34 +83,6 @@ const envSchema = z
         code: "custom",
         message: requiredEmailCredentialMessage,
         path: ["EMAIL_FROM"],
-      });
-    }
-
-    if (!value.ALIPAY_ENABLED) {
-      return;
-    }
-
-    if (value.ALIPAY_APP_ID.length === 0) {
-      ctx.addIssue({
-        code: "custom",
-        message: requiredAlipayCredentialMessage,
-        path: ["ALIPAY_APP_ID"],
-      });
-    }
-
-    if (value.ALIPAY_PRIVATE_KEY.length === 0) {
-      ctx.addIssue({
-        code: "custom",
-        message: requiredAlipayCredentialMessage,
-        path: ["ALIPAY_PRIVATE_KEY"],
-      });
-    }
-
-    if (value.ALIPAY_PUBLIC_KEY.length === 0) {
-      ctx.addIssue({
-        code: "custom",
-        message: requiredAlipayCredentialMessage,
-        path: ["ALIPAY_PUBLIC_KEY"],
       });
     }
   });

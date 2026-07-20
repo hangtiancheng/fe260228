@@ -16,28 +16,25 @@ describe("staging smoke configuration", () => {
     expect(
       parseStagingSmokeEnv({
         AI_PROVIDER: "ollama",
-        ALIPAY_ENABLED: "true",
         EMAIL_ENABLED: "true",
         STAGING_BASE_URL: "https://staging.example.com",
         STAGING_SMOKE_TIMEOUT_MS: "3000",
       }),
     ).toEqual({
       aiProvider: "ollama",
-      alipayEnabled: true,
       baseUrl: "https://staging.example.com",
       emailEnabled: true,
       timeoutMs: 3000,
     });
   });
 
-  test("declares DeepSeek staging environment keys", () => {
-    expect(createRequiredStagingEnvKeys("deepseek")).toEqual([
+  test("declares OpenAI staging environment keys", () => {
+    expect(createRequiredStagingEnvKeys("openai")).toEqual([
       "DATABASE_URL",
       "REDIS_HOST",
       "MINIO_ENDPOINT",
       "MINIO_BUCKET",
-      "PAYMENT_NOTIFY_SECRET",
-      "DEEPSEEK_API_KEY",
+      "OPENAI_API_KEY",
     ]);
   });
 
@@ -47,16 +44,14 @@ describe("staging smoke configuration", () => {
       "REDIS_HOST",
       "MINIO_ENDPOINT",
       "MINIO_BUCKET",
-      "PAYMENT_NOTIFY_SECRET",
       "OLLAMA_BASE_URL",
       "OLLAMA_MODEL",
     ]);
   });
 
-  test("declares optional email and Alipay staging environment keys", () => {
+  test("declares optional email staging environment keys", () => {
     expect(
-      createRequiredStagingEnvKeys("deepseek", {
-        alipayEnabled: true,
+      createRequiredStagingEnvKeys("openai", {
         emailEnabled: true,
       }),
     ).toEqual([
@@ -68,12 +63,7 @@ describe("staging smoke configuration", () => {
       "EMAIL_USER",
       "EMAIL_PASSWORD",
       "EMAIL_FROM",
-      "ALIPAY_APP_ID",
-      "ALIPAY_PRIVATE_KEY",
-      "ALIPAY_PUBLIC_KEY",
-      "ALIPAY_GATEWAY",
-      "ALIPAY_NOTIFY_URL",
-      "DEEPSEEK_API_KEY",
+      "OPENAI_API_KEY",
     ]);
   });
 });
@@ -102,7 +92,6 @@ describe("staging smoke report", () => {
         { name: "digest-email", status: "required" },
         { name: "avatar-upload", status: "required" },
         { name: "tracker-persist", status: "required" },
-        { name: "payment-notify-boundary", status: "required" },
       ],
     });
     expect(fetchImpl).toHaveBeenNthCalledWith(

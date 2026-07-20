@@ -39,16 +39,15 @@ export const findLearningWords = async (
   userId: string,
   courseId: string,
 ) => {
-  const courseRecord = await prisma.courseRecord.findFirst({
-    where: { userId, courseId, isPurchased: true },
-    include: { course: true },
+  const course = await prisma.course.findUnique({
+    where: { id: courseId },
   });
 
-  if (!courseRecord) {
+  if (!course) {
     return { allowed: false, words: [] };
   }
 
-  const where = buildLearningWordWhere(courseRecord.course.value, userId);
+  const where = buildLearningWordWhere(course.value, userId);
   if (!where) {
     return { allowed: false, words: [] };
   }

@@ -8,7 +8,7 @@ const createConfig = (fetchImpl: typeof fetch) => ({
   baseUrl: "http://127.0.0.1:11434",
   chatModel: "qwen3.5",
   fetchImpl,
-  reasonerModel: "deepseek-r1",
+  reasonerModel: "openai-r1",
 });
 
 describe("Ollama readiness", () => {
@@ -21,10 +21,7 @@ describe("Ollama readiness", () => {
       checkOllamaModels(
         createConfig(async () =>
           Response.json({
-            models: [
-              { name: "qwen3.5:latest" },
-              { name: "deepseek-r1:latest" },
-            ],
+            models: [{ name: "qwen3.5:latest" }, { name: "openai-r1:latest" }],
           }),
         ),
       ),
@@ -42,7 +39,7 @@ describe("Ollama readiness", () => {
         ),
       ),
     ).resolves.toEqual({
-      message: "missing Ollama models: deepseek-r1",
+      message: "missing Ollama models: openai-r1",
       ok: false,
     });
   });

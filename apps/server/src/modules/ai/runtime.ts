@@ -1,4 +1,4 @@
-import { ChatDeepSeek } from "@langchain/deepseek";
+import { ChatOpenAI } from "@langchain/openai";
 import { PostgresSaver } from "@langchain/langgraph-checkpoint-postgres";
 import { ChatOllama } from "@langchain/ollama";
 import type { CreateAgentParams } from "langchain";
@@ -18,9 +18,9 @@ export interface AiAgentOptions extends ChatModelOptions {
 type AiRuntimeEnv = Pick<
   Env,
   | "AI_PROVIDER"
-  | "DEEPSEEK_API_KEY"
-  | "DEEPSEEK_API_MODEL"
-  | "DEEPSEEK_REASONER_API_MODEL"
+  | "OPENAI_API_KEY"
+  | "OPENAI_API_MODEL"
+  | "OPENAI_REASONER_API_MODEL"
   | "OLLAMA_BASE_URL"
   | "OLLAMA_MODEL"
   | "OLLAMA_REASONER_MODEL"
@@ -28,19 +28,19 @@ type AiRuntimeEnv = Pick<
 
 type AiAgentTools = NonNullable<CreateAgentParams["tools"]>;
 
-export const createDeepSeekInstance = (config: AiRuntimeEnv = env) =>
-  new ChatDeepSeek({
-    apiKey: config.DEEPSEEK_API_KEY,
-    model: config.DEEPSEEK_API_MODEL,
+export const createOpenAIInstance = (config: AiRuntimeEnv = env) =>
+  new ChatOpenAI({
+    apiKey: config.OPENAI_API_KEY,
+    model: config.OPENAI_API_MODEL,
     temperature: 1.3,
     maxTokens: 4396,
     streaming: true,
   });
 
-export const createDeepSeekReasoner = (config: AiRuntimeEnv = env) =>
-  new ChatDeepSeek({
-    apiKey: config.DEEPSEEK_API_KEY,
-    model: config.DEEPSEEK_REASONER_API_MODEL,
+export const createOpenAIReasoner = (config: AiRuntimeEnv = env) =>
+  new ChatOpenAI({
+    apiKey: config.OPENAI_API_KEY,
+    model: config.OPENAI_REASONER_API_MODEL,
     temperature: 1.3,
     maxTokens: 18000,
     streaming: true,
@@ -72,8 +72,8 @@ export const createChatModelForEnv = (
   }
 
   return deepThink
-    ? createDeepSeekReasoner(config)
-    : createDeepSeekInstance(config);
+    ? createOpenAIReasoner(config)
+    : createOpenAIInstance(config);
 };
 
 export const createChatModel = (options: ChatModelOptions = {}) =>
@@ -89,8 +89,8 @@ export const selectAgentModelId = (
     return `ollama:${selectOllamaModel(config, deepThink)}`;
   }
 
-  return `deepseek:${
-    deepThink ? config.DEEPSEEK_REASONER_API_MODEL : config.DEEPSEEK_API_MODEL
+  return `openai:${
+    deepThink ? config.OPENAI_REASONER_API_MODEL : config.OPENAI_API_MODEL
   }`;
 };
 

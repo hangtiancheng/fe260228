@@ -43,13 +43,13 @@ describe("createBrowserSocket", () => {
       userId: "user-1",
     });
 
-    socket.on("paymentSuccess", listener);
-    socket.off("paymentSuccess", listener);
+    socket.on("chatUpdate", listener);
+    socket.off("chatUpdate", listener);
     socket.disconnect();
     socket.removeAllListeners();
 
-    expect(socketMock.on).toHaveBeenCalledWith("paymentSuccess", listener);
-    expect(socketMock.off).toHaveBeenCalledWith("paymentSuccess", listener);
+    expect(socketMock.on).toHaveBeenCalledWith("chatUpdate", listener);
+    expect(socketMock.off).toHaveBeenCalledWith("chatUpdate", listener);
     expect(socketMock.disconnect).toHaveBeenCalled();
     expect(socketMock.removeAllListeners).toHaveBeenCalled();
   });

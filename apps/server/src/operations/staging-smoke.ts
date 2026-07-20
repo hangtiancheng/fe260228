@@ -20,8 +20,7 @@ const booleanStagingEnvSchema = z
   .transform((value) => value === "1" || value === "true");
 
 const stagingSmokeEnvSchema = z.object({
-  AI_PROVIDER: aiProviderSchema.default("deepseek"),
-  ALIPAY_ENABLED: booleanStagingEnvSchema,
+  AI_PROVIDER: aiProviderSchema.default("openai"),
   EMAIL_ENABLED: booleanStagingEnvSchema,
   STAGING_BASE_URL: z.url(),
   STAGING_SMOKE_TIMEOUT_MS: z.coerce.number().int().positive().default(5000),
@@ -32,7 +31,6 @@ export type AutomatedCheckName = "health" | "readiness";
 
 export interface StagingSmokeConfig {
   readonly aiProvider: StagingAiProvider;
-  readonly alipayEnabled: boolean;
   readonly baseUrl: string;
   readonly emailEnabled: boolean;
   readonly timeoutMs: number;
@@ -57,7 +55,6 @@ export const parseStagingSmokeEnv = (source: unknown): StagingSmokeConfig => {
   const parsed = stagingSmokeEnvSchema.parse(source);
   return {
     aiProvider: parsed.AI_PROVIDER,
-    alipayEnabled: parsed.ALIPAY_ENABLED,
     baseUrl: parsed.STAGING_BASE_URL,
     emailEnabled: parsed.EMAIL_ENABLED,
     timeoutMs: parsed.STAGING_SMOKE_TIMEOUT_MS,
@@ -95,15 +92,13 @@ const runHttpCheck = async (
 };
 
 export const createStagingSmokeReport = async ({
-  aiProvider = "deepseek",
-  alipayEnabled = false,
+  aiProvider = "openai",
   baseUrl,
   emailEnabled = false,
   timeoutMs = 5000,
   fetchImpl = fetch,
 }: {
   readonly aiProvider?: StagingAiProvider;
-  readonly alipayEnabled?: boolean;
   readonly baseUrl: string;
   readonly emailEnabled?: boolean;
   readonly timeoutMs?: number;
@@ -129,7 +124,6 @@ export const createStagingSmokeReport = async ({
     automatedChecks,
     manualChecks,
     requiredEnvKeys: createRequiredStagingEnvKeys(aiProvider, {
-      alipayEnabled,
       emailEnabled,
     }),
   };

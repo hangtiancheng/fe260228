@@ -1,8 +1,7 @@
 export type ManualCheckName =
   | "digest-email"
   | "avatar-upload"
-  | "tracker-persist"
-  | "payment-notify-boundary";
+  | "tracker-persist";
 
 export interface ManualSmokeCheck {
   readonly name: ManualCheckName;
@@ -29,11 +28,5 @@ export const manualChecks: readonly ManualSmokeCheck[] = [
     status: "required",
     owner: "backend",
     rollbackCriterion: "tracker events are not persisted in PostgreSQL",
-  },
-  {
-    name: "payment-notify-boundary",
-    status: "required",
-    owner: "backend",
-    rollbackCriterion: "untrusted payment notify reaches database writes",
   },
 ];

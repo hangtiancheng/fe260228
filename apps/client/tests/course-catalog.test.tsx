@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { AppServicesProvider } from "../src/app/app-services-context";
 import { createAppServices } from "../src/app/app-services";
@@ -45,7 +45,7 @@ describe("CourseCatalog", () => {
     vi.unstubAllGlobals();
   });
 
-  test("loads courses and opens auth when a guest purchases", async () => {
+  test("loads courses and renders start learning links", async () => {
     const fetchMock: typeof fetch = async () =>
       successResponse([course], "/course/list");
     vi.stubGlobal("fetch", fetchMock);
@@ -64,11 +64,11 @@ describe("CourseCatalog", () => {
     expect(
       await screen.findByRole("heading", { name: course.name }),
     ).toBeInTheDocument();
-
-    fireEvent.click(screen.getByRole("button", { name: "Purchase course" }));
-
     expect(
-      await screen.findByRole("heading", { name: "Welcome back" }),
-    ).toBeInTheDocument();
+      screen.getByRole("link", { name: /Start learning/ }),
+    ).toHaveAttribute(
+      "href",
+      `/courses/learn/${encodeURIComponent(course.id)}/${encodeURIComponent(course.name)}`,
+    );
   });
 });

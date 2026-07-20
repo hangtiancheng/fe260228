@@ -3,7 +3,6 @@ import { prisma } from "../shared/prisma/index.js";
 import { createRedisConnection } from "../shared/redis/connection.js";
 import { getBucket, minioClient } from "../shared/utils/minio.js";
 import { createAiConfigCheck } from "./ai-readiness.js";
-import { createPaymentConfigCheck } from "./payment-readiness.js";
 import {
   createDependencyStatus,
   type ReadinessCheck,
@@ -47,7 +46,6 @@ export const defaultReadinessChecks = (): readonly ReadinessCheck[] => [
   createRedisCheck(),
   createMinioCheck(),
   createAiConfigCheck(),
-  createPaymentConfigCheck(),
 ];
 
 export const createReadinessReport = async (
@@ -66,5 +64,4 @@ export type { ReadinessCheck, ReadinessReport };
 export {
   createAiConfigCheck,
   createDependencyStatus,
-  createPaymentConfigCheck,
 };

@@ -13,14 +13,6 @@ datasource db {
   provider = "postgresql"
 }
 
-enum TradeStatus {
-  NOT_PAY // 未支付, 默认值
-  WAIT_BUYER_PAY // 等待买家付款
-  TRADE_CLOSED // 交易关闭
-  TRADE_SUCCESS // 交易成功, 可退款
-  TRADE_FINISHED // 交易结束, 不可退款
-}
-
 // 用户表
 model User {
   id              String           @id @default(cuid()) // 用户 ID
@@ -39,8 +31,6 @@ model User {
   updatedAt       DateTime         @updatedAt // 更新时间
   lastLoginAt     DateTime? // 最后登录时间
   wordBookRecords WordBookRecord[]
-  paymentRecords  PaymentRecord[]
-  courseRecords   CourseRecord[]
   visitors        Visitor[]
 }
 
@@ -89,40 +79,7 @@ model WordBook {
   @@index([word, tag])
 }
 
-// 支付记录
-model PaymentRecord {
-  id            String         @id @default(cuid()) // 支付 ID
-  userId        String // 用户 ID
-  tradeNo       String? // 支付宝交易号
-  outTradeNo    String         @unique // 订单编号
-  amount        Decimal // 支付金额
-  subject       String // 支付主题
-  body          String // 支付内容
-  tradeStatus   TradeStatus    @default(NOT_PAY) // 支付状态, 默认未支付 NOT_PAY
-  sendPayTime   DateTime? // 支付时间
-  createdAt     DateTime       @default(now()) // 创建时间
-  updatedAt     DateTime       @updatedAt // 更新时间
-  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  courseRecords CourseRecord[]
-
-  @@index([tradeNo])
-}
-
-model CourseRecord {
-  id              String         @id @default(cuid()) // 课程记录 ID
-  userId          String // 用户 ID
-  courseId        String // 课程 ID
-  isPurchased     Boolean        @default(false) // 是否购买
-  createdAt       DateTime       @default(now()) // 创建时间
-  updatedAt       DateTime       @updatedAt // 更新时间
-  paymentRecordId String? // 支付记录 ID
-  paymentRecord   PaymentRecord? @relation(fields: [paymentRecordId], references: [id], onDelete: Cascade)
-  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  course          Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, courseId])
-}
-
+// 课程表
 model Course {
   id            String         @id @default(cuid()) // 课程 ID
   name          String // 课程名
@@ -133,7 +90,6 @@ model Course {
   price         Decimal // 课程价格
   createdAt     DateTime       @default(now()) // 创建时间
   updatedAt     DateTime       @updatedAt // 更新时间
-  courseRecords CourseRecord[]
 }
 
 // UV 表

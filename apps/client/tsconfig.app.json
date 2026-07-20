@@ -45,7 +45,6 @@
     "tests/speech-recognition.test.tsx",
     "tests/response-schema.test.ts",
     "tests/word-schema.test.ts",
-    "tests/pay-schema.test.ts",
     "tests/use-auth-session.test.tsx",
     "tests/auth-session.test.ts",
     ".storybook/components/auth-ui.stories.tsx",
@@ -54,8 +53,6 @@
     ".storybook/components/chat.stories.tsx",
     "tests/course-catalog.test.tsx",
     "tests/course-image.test.ts",
-    "tests/payment-dialog.test.tsx",
-    "tests/payment-dialog-realtime.test.tsx",
     "tests/spelling-state.test.ts",
     "tests/use-learning-session.test.tsx",
     "tests/learn-route-params.test.ts",
@@ -72,7 +69,6 @@
     ".storybook/components/home-page.stories.tsx",
     "tests/home-page.test.tsx",
     "tests/use-home-motion.test.tsx",
-    ".storybook/components/storybook-services.tsx",
-    "tests/payment-dialog-test-helpers.ts"
+    ".storybook/components/storybook-services.tsx"
   ]
 }

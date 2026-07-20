@@ -25,23 +25,6 @@ describe("environment validation", () => {
     expect(env.REDIS_PORT).toBe(6380);
   });
 
-  test("defaults Alipay integration to disabled", () => {
-    const env = parseEnv({
-      JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
-    });
-
-    expect(env.ALIPAY_ENABLED).toBe(false);
-  });
-
-  test("parses disabled Alipay integration flag", () => {
-    const env = parseEnv({
-      ALIPAY_ENABLED: "false",
-      JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
-    });
-
-    expect(env.ALIPAY_ENABLED).toBe(false);
-  });
-
   test("defaults email integration to disabled", () => {
     const env = parseEnv({
       JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
@@ -73,34 +56,9 @@ describe("environment validation", () => {
     expect(env.EMAIL_HOST).toBe("smtp.example.com");
   });
 
-  test("rejects enabled Alipay integration without credentials", () => {
-    expect(() =>
-      parseEnv({
-        ALIPAY_ENABLED: "true",
-        JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
-      }),
-    ).toThrow();
-  });
-
-  test("parses enabled Alipay integration credentials", () => {
-    const env = parseEnv({
-      ALIPAY_APP_ID: "app-id",
-      ALIPAY_ENABLED: "true",
-      ALIPAY_GATEWAY: "https://openapi.alipay.com/gateway.do",
-      ALIPAY_NOTIFY_URL: "https://api.example.com",
-      ALIPAY_PRIVATE_KEY: "private-key",
-      ALIPAY_PUBLIC_KEY: "public-key",
-      JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
-    });
-
-    expect(env.ALIPAY_ENABLED).toBe(true);
-    expect(env.ALIPAY_APP_ID).toBe("app-id");
-    expect(env.ALIPAY_NOTIFY_URL).toBe("https://api.example.com");
-  });
-
   test("parses supported AI providers", () => {
-    const deepseekEnv = parseEnv({
-      AI_PROVIDER: "deepseek",
+    const openaiEnv = parseEnv({
+      AI_PROVIDER: "openai",
       JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
     });
     const ollamaEnv = parseEnv({
@@ -110,19 +68,19 @@ describe("environment validation", () => {
       OLLAMA_MODEL: "qwen3.5",
     });
 
-    expect(deepseekEnv.AI_PROVIDER).toBe("deepseek");
+    expect(openaiEnv.AI_PROVIDER).toBe("openai");
     expect(ollamaEnv.AI_PROVIDER).toBe("ollama");
     expect(ollamaEnv.OLLAMA_MODEL).toBe("qwen3.5");
   });
 
-  test("defaults Ollama models to Qwen chat and DeepSeek reasoning", () => {
+  test("defaults Ollama models to Qwen chat and OpenAI reasoning", () => {
     const env = parseEnv({
       AI_PROVIDER: "ollama",
       JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
     });
 
     expect(env.OLLAMA_MODEL).toBe("qwen3.5");
-    expect(env.OLLAMA_REASONER_MODEL).toBe("deepseek-r1");
+    expect(env.OLLAMA_REASONER_MODEL).toBe("openai-r1");
   });
 
   test("rejects unsupported AI providers", () => {

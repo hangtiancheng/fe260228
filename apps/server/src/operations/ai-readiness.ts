@@ -11,7 +11,7 @@ type AiReadinessEnv = Pick<
   | "BOCHA_API_KEY"
   | "BOCHA_ENABLED"
   | "BOCHA_SEARCH_URL"
-  | "DEEPSEEK_API_KEY"
+  | "OPENAI_API_KEY"
   | "OLLAMA_BASE_URL"
   | "OLLAMA_MODEL"
   | "OLLAMA_REASONER_MODEL"
@@ -36,8 +36,8 @@ export const createAiConfigCheck =
     options: AiReadinessOptions = {},
   ): ReadinessCheck =>
   async () => {
-    if (config.AI_PROVIDER === "deepseek" && config.DEEPSEEK_API_KEY === "") {
-      return createDependencyStatus("ai", false, "missing DEEPSEEK_API_KEY");
+    if (config.AI_PROVIDER === "openai" && config.OPENAI_API_KEY === "") {
+      return createDependencyStatus("ai", false, "missing OPENAI_API_KEY");
     }
 
     if (
@@ -69,6 +69,6 @@ export const createAiConfigCheck =
       true,
       config.AI_PROVIDER === "ollama"
         ? "configured for ollama with local models"
-        : "configured for deepseek",
+        : "configured for openai",
     );
   };

@@ -4,15 +4,11 @@ import { createCourseImageUrl } from "./course-image";
 
 export type CourseCardProps = {
   readonly course: Course;
-  readonly mode: "catalog" | "owned";
-  readonly openPayment: (course: Course) => void;
   readonly serverBaseUrl: string;
 };
 
 export function CourseCard({
   course,
-  mode,
-  openPayment,
   serverBaseUrl,
 }: CourseCardProps) {
   const imageUrl = createCourseImageUrl(serverBaseUrl, course.url);
@@ -45,20 +41,10 @@ export function CourseCard({
           </span>
         </div>
         <div className="card-actions mt-2">
-          {mode === "owned" ? (
-            <a className="btn btn-primary w-full" href={learnUrl}>
-              <BookOpen aria-hidden="true" size={18} />
-              Start learning
-            </a>
-          ) : (
-            <button
-              className="btn btn-outline btn-primary w-full"
-              onClick={() => openPayment(course)}
-              type="button"
-            >
-              Purchase course
-            </button>
-          )}
+          <a className="btn btn-primary w-full" href={learnUrl}>
+            <BookOpen aria-hidden="true" size={18} />
+            Start learning
+          </a>
         </div>
       </div>
     </article>

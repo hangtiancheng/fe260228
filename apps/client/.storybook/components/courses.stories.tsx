@@ -24,12 +24,7 @@ type Story = StoryObj;
 export const CatalogCard: Story = {
   render: () => (
     <div className="max-w-sm">
-      <CourseCard
-        course={course}
-        mode="catalog"
-        openPayment={() => undefined}
-        serverBaseUrl=""
-      />
+      <CourseCard course={course} serverBaseUrl="" />
     </div>
   ),
 };

@@ -4,7 +4,6 @@ import type { aiProviderSchema } from "../shared/config/env.js";
 export type StagingAiProvider = z.infer<typeof aiProviderSchema>;
 
 export interface StagingDependencyFlags {
-  readonly alipayEnabled?: boolean;
   readonly emailEnabled?: boolean;
 }
 
@@ -22,16 +21,8 @@ const emailRequiredStagingEnvKeys = [
   "EMAIL_FROM",
 ] as const;
 
-const alipayRequiredStagingEnvKeys = [
-  "ALIPAY_APP_ID",
-  "ALIPAY_PRIVATE_KEY",
-  "ALIPAY_PUBLIC_KEY",
-  "ALIPAY_GATEWAY",
-  "ALIPAY_NOTIFY_URL",
-] as const;
-
 const providerRequiredStagingEnvKeys = {
-  deepseek: ["DEEPSEEK_API_KEY"] as const,
+  openai: ["OPENAI_API_KEY"] as const,
   ollama: ["OLLAMA_BASE_URL", "OLLAMA_MODEL"] as const,
 };
 
@@ -41,8 +32,5 @@ export const createRequiredStagingEnvKeys = (
 ) => [
   ...commonRequiredStagingEnvKeys,
   ...(flags.emailEnabled ? emailRequiredStagingEnvKeys : []),
-  ...(flags.alipayEnabled
-    ? alipayRequiredStagingEnvKeys
-    : ["PAYMENT_NOTIFY_SECRET"]),
   ...providerRequiredStagingEnvKeys[aiProvider],
 ];
