@@ -7,7 +7,7 @@ const config: StorybookConfig = {
     options: {},
   },
   staticDirs: ["../public"],
-  stories: ["../src/**/*.stories.@(ts|tsx)"],
+  stories: ["./components/*.stories.@(ts|tsx)"],
 };
 
 export default config;
