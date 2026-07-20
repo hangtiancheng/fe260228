@@ -1,7 +1,8 @@
 import { Flame, Sparkles } from "lucide-react";
 import { useAuthSession } from "../../features/auth";
-import { useAppServices } from "../use-app-services";
 import { appNavigationItems } from "../../shared/navigation";
+import { Button } from "@/shared/ui/components/button";
+import { useAppServices } from "../use-app-services";
 import { MetricPill } from "./metric-pill";
 import { NavigationPill } from "./navigation-pill";
 import { ProfileMenu } from "./profile-menu";
@@ -15,15 +16,22 @@ export function AppHeader({ activePath }: AppHeaderProps) {
   const { user } = useAuthSession(session);
 
   return (
-    <header className="border-base-300 bg-base-100/90 sticky top-0 z-20 border-b backdrop-blur">
-      <div className="navbar mx-auto max-w-7xl px-4">
-        <div className="navbar-start gap-3">
-          <a className="btn btn-primary btn-square text-xl font-black" href="/">
-            E
-          </a>
-          <span className="hidden text-xl font-black md:inline">fe260228</span>
+    <header className="bg-background/70 sticky top-0 z-20 [mask-image:linear-gradient(to_bottom,black_calc(100%-1px),transparent)] backdrop-blur-xl backdrop-saturate-150">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2">
+        <div className="flex items-center gap-3">
+          <Button asChild className="size-10 rounded-lg p-0 text-lg font-black">
+            <a href="/">
+              <span>E</span>
+            </a>
+          </Button>
+          <span className="font-display hidden text-xl font-black tracking-tight md:inline">
+            fe260228
+          </span>
         </div>
-        <nav aria-label="Primary navigation" className="navbar-center gap-2">
+        <nav
+          aria-label="Primary navigation"
+          className="flex items-center gap-1"
+        >
           {appNavigationItems.map((item) => (
             <NavigationPill
               activePath={activePath}
@@ -32,7 +40,7 @@ export function AppHeader({ activePath }: AppHeaderProps) {
             />
           ))}
         </nav>
-        <div className="navbar-end gap-2">
+        <div className="flex items-center gap-2">
           <div className="hidden gap-2 xl:flex">
             <MetricPill
               icon={Sparkles}

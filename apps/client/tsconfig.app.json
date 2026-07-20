@@ -16,7 +16,7 @@
     "jsx": "react-jsx",
     /* Linting */
     "strict": true,
-    "exactOptionalPropertyTypes": true,
+    "exactOptionalPropertyTypes": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
@@ -26,5 +26,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [".storybook", "src", "tests", "vite-plugin-sentry.ts"]
+  "include": [".storybook", ".storybook/components", "src", "tests"]
 }

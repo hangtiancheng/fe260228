@@ -1,5 +1,6 @@
 import { Sparkles } from "lucide-react";
 import type { WordMarqueeItem } from "../../shared/api/word-marquee-schema";
+import { Badge } from "@/shared/ui/components/badge";
 import { useWordMarquee } from "./use-word-marquee";
 
 export type WordMarqueeProps = {
@@ -22,12 +23,12 @@ function getLaneWords(words: readonly WordMarqueeItem[], lane: number) {
 
 function WordChip({ item }: { readonly item: WordMarqueeItem }) {
   return (
-    <li className="group text-neutral-content hover:border-primary/60 hover:bg-primary/20 flex min-w-max items-center gap-3 rounded-full border border-white/15 bg-white/10 px-5 py-3 shadow-lg shadow-black/20 backdrop-blur-md transition hover:-translate-y-1">
-      <span className="text-2xl font-black tracking-tight">{item.word}</span>
+    <li className="group hover:border-primary/60 hover:bg-primary/20 flex min-w-max items-center gap-3 rounded-full border border-white/15 bg-white/10 px-5 py-3 shadow-lg shadow-black/20 backdrop-blur-md transition hover:-translate-y-1">
+      <span className="text-2xl font-bold tracking-tight">{item.word}</span>
       <span className="text-primary font-mono text-xs">{item.phonetic}</span>
-      <span className="badge badge-outline text-neutral-content/75 border-white/20">
+      <Badge className="border-white/20 text-white/75" variant="outline">
         {item.level}
-      </span>
+      </Badge>
     </li>
   );
 }
@@ -41,26 +42,27 @@ export function WordMarquee({
   return (
     <section
       aria-label="English word marquee"
-      className="rounded-box bg-neutral text-neutral-content relative min-h-96 overflow-hidden shadow-2xl"
+      className="relative min-h-96 overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 to-sky-950 text-white shadow-2xl"
+      data-speed="0.9"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.35),transparent_32%),radial-gradient(circle_at_78%_72%,rgba(16,185,129,0.28),transparent_34%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,oklch(0.58_0.16_245/0.35),transparent_32%),radial-gradient(circle_at_78%_72%,oklch(0.7_0.17_155/0.28),transparent_34%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-size-[36px_36px] opacity-30" />
       <div className="relative z-10 flex h-full min-h-96 flex-col justify-between gap-8 p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <div className="badge badge-primary badge-lg gap-2">
+            <Badge className="bg-primary text-primary-foreground gap-2 px-3 py-1">
               <Sparkles aria-hidden="true" size={16} />
               {eyebrow}
-            </div>
-            <h2 className="mt-4 max-w-lg text-4xl leading-none font-black tracking-tight">
+            </Badge>
+            <h2 className="font-display mt-4 max-w-lg text-4xl leading-none font-bold tracking-tight">
               {title}
             </h2>
           </div>
-          <div className="text-neutral-content/70 hidden rounded-full border border-white/15 px-4 py-2 font-mono text-xs sm:block">
+          <div className="hidden rounded-full border border-white/15 px-4 py-2 font-mono text-xs text-white/70 sm:block">
             MSW powered mock feed
           </div>
         </div>
-        <div className="flex flex-col gap-4 mask-x-from-80% py-4">
+        <div className="flex flex-col gap-4 py-4">
           {laneClasses.map((className, lane) => {
             const laneWords = getLaneWords(words, lane);
             return (
@@ -76,7 +78,7 @@ export function WordMarquee({
             );
           })}
         </div>
-        <p className="text-neutral-content/65 max-w-xl text-sm leading-7">
+        <p className="max-w-xl text-sm leading-7 text-white/65">
           The new lightweight vocabulary motion surface keeps the learning
           context in plain English while avoiding heavyweight visual assets.
         </p>

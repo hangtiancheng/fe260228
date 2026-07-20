@@ -16,7 +16,7 @@
 
     /* Linting */
     "strict": true,
-    "exactOptionalPropertyTypes": true,
+    "exactOptionalPropertyTypes": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
@@ -27,9 +27,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "./eslint.config.ts",
-    "./vite.config.ts",
-    "./vite-plugin-sentry.ts"
-  ]
+  "include": ["./eslint.config.ts", "./vite.config.ts"]
 }

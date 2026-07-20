@@ -1,5 +1,6 @@
 import { AuthDialog } from "../auth-ui";
 import { ErrorState, LoadingState } from "../../shared/ui";
+import { Badge } from "../../shared/ui/components/badge";
 import { ChatAuthGate } from "./chat-auth-gate";
 import { ChatComposer } from "./chat-composer";
 import { ChatMessageList } from "./chat-message-list";
@@ -13,9 +14,11 @@ export function ChatExperience() {
   return (
     <div className="flex flex-col gap-6">
       <header>
-        <div className="badge badge-primary badge-soft mb-3">Realtime chat</div>
+        <Badge variant="secondary" className="bg-primary/10 text-primary mb-3">
+          Realtime chat
+        </Badge>
         <h1 className="text-4xl font-black">AI conversation studio</h1>
-        <p className="text-base-content/65 mt-3 max-w-2xl">
+        <p className="text-muted-foreground mt-3 max-w-2xl">
           Switch roles, stream safe AI responses, and practice with typed
           realtime boundaries.
         </p>

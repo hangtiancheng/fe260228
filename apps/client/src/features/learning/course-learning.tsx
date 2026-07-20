@@ -1,3 +1,5 @@
+import { Badge } from "@/shared/ui/components/badge";
+import { Button } from "@/shared/ui/components/button";
 import { EmptyState, ErrorState, LoadingState } from "../../shared/ui";
 import { LearningCompleteCard } from "./learning-complete-card";
 import type { LearnRouteParams } from "./learn-route-params";
@@ -32,11 +34,11 @@ function CourseLearningContent({
   return (
     <div className="flex flex-col gap-6">
       <header className="text-center">
-        <div className="badge badge-secondary badge-soft mb-3">
+        <Badge variant="secondary" className="mb-3">
           Learning mode
-        </div>
-        <h1 className="text-4xl font-black">{title}</h1>
-        <p className="text-base-content/65 mt-3">
+        </Badge>
+        <h1 className="text-4xl font-bold">{title}</h1>
+        <p className="text-muted-foreground mt-3">
           Spell each word after reading the definition and translation.
         </p>
       </header>
@@ -45,7 +47,7 @@ function CourseLearningContent({
       {!session.isLoading && session.words.length === 0 ? <EmptyState /> : null}
       {session.currentWord ? (
         <>
-          <div className="text-base-content/60 flex justify-between text-sm">
+          <div className="text-muted-foreground flex justify-between text-sm">
             <span>
               Word {currentPosition} / {session.words.length}
             </span>
@@ -57,17 +59,16 @@ function CourseLearningContent({
           />
           <SpellingGrid cells={session.cells} updateCell={session.updateCell} />
           <div className="flex justify-end gap-2">
-            <button className="btn" onClick={session.previous} type="button">
+            <Button variant="outline" onClick={session.previous} type="button">
               Previous
-            </button>
-            <button
-              className="btn btn-primary"
+            </Button>
+            <Button
               disabled={!session.isComplete}
               onClick={session.next}
               type="button"
             >
               Next
-            </button>
+            </Button>
           </div>
         </>
       ) : null}

@@ -1,8 +1,12 @@
-import { X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@/shared/ui/components/dialog";
 import { WordMarquee } from "../word-marquee";
-import type { AuthMode } from "./auth-mode";
 import { LoginForm } from "./login-form";
+import type { AuthMode } from "./auth-mode";
 import { RegisterForm } from "./register-form";
 
 export type AuthDialogProps = {
@@ -13,55 +17,38 @@ export type AuthDialogProps = {
 export function AuthDialog({ close, isOpen }: AuthDialogProps) {
   const [mode, setMode] = useState<AuthMode>("login");
 
-  useEffect(() => {
-    if (!isOpen) return undefined;
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") close();
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [close, isOpen]);
-
-  if (!isOpen) return null;
-
   return (
-    <div aria-modal="true" className="modal modal-open" role="dialog">
-      <div className="modal-box grid max-w-6xl gap-0 p-0 lg:grid-cols-[1.35fr_1fr]">
-        <WordMarquee
-          eyebrow={
-            mode === "login" ? "Welcome word stream" : "Starter word stream"
-          }
-          title={
-            mode === "login"
-              ? "Warm up with words before your next session."
-              : "Build your first practice loop with living vocabulary."
-          }
-        />
-        <div className="relative flex min-h-96 flex-col justify-center p-8">
-          <button
-            aria-label="Close authentication dialog"
-            className="btn btn-ghost btn-circle absolute top-4 right-4"
-            onClick={close}
-            type="button"
-          >
-            <X aria-hidden="true" size={20} />
-          </button>
-          {mode === "login" ? (
-            <LoginForm close={close} setMode={setMode} />
-          ) : (
-            <RegisterForm close={close} setMode={setMode} />
-          )}
+    <Dialog
+      onOpenChange={(open) => {
+        if (!open) close();
+      }}
+      open={isOpen}
+    >
+      <DialogContent
+        className="grid max-w-6xl gap-0 overflow-hidden p-0 sm:max-w-6xl"
+        showCloseButton
+      >
+        <DialogTitle className="sr-only">Authentication</DialogTitle>
+        <div className="grid gap-0 lg:grid-cols-[1.35fr_1fr]">
+          <WordMarquee
+            eyebrow={
+              mode === "login" ? "Welcome word stream" : "Starter word stream"
+            }
+            title={
+              mode === "login"
+                ? "Warm up with words before your next session."
+                : "Build your first practice loop with living vocabulary."
+            }
+          />
+          <div className="bg-card relative flex min-h-96 flex-col justify-center p-8">
+            {mode === "login" ? (
+              <LoginForm close={close} setMode={setMode} />
+            ) : (
+              <RegisterForm close={close} setMode={setMode} />
+            )}
+          </div>
         </div>
-      </div>
-      <button
-        aria-label="Close authentication dialog backdrop"
-        className="modal-backdrop"
-        onClick={close}
-        type="button"
-      />
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }

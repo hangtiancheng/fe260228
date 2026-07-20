@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { AppConfig } from "../shared/config";
+import { Toaster } from "@/shared/ui/components/sonner";
 import { createAppProviders } from "./app-providers";
 import { createAppRouter } from "./app-router";
 import { createAppServices } from "./app-services";
@@ -22,6 +23,7 @@ export function createAppRoot(config: AppConfig): AppRoot {
         <AppServicesProvider services={services}>
           <SocketLifecycleBridge />
           <appRouter.RouterView />
+          <Toaster />
         </AppServicesProvider>
       </AppProviders>
     );

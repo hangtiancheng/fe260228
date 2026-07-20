@@ -8,6 +8,10 @@ import { AvatarCard } from "./avatar-card";
 import { ProfileForm } from "./profile-form";
 import { TaskCard } from "./task-card";
 import { useSettingsProfile } from "./use-settings-profile";
+import { Alert, AlertDescription } from "@/shared/ui/components/alert";
+import { Badge } from "@/shared/ui/components/badge";
+import { Button } from "@/shared/ui/components/button";
+
 export function SettingsProfile() {
   const { config } = useAppServices();
   const state = useSettingsProfile();
@@ -16,23 +20,15 @@ export function SettingsProfile() {
   if (!state.user || !state.form) {
     return (
       <>
-        <section className="hero rounded-box bg-base-200 min-h-96">
-          <div className="hero-content text-center">
-            <div className="max-w-md">
-              <h1 className="text-4xl font-black">
-                Sign in to manage settings
-              </h1>
-              <p className="text-base-content/65 py-4">
-                Profile, avatar, and daily reminder controls require an account.
-              </p>
-              <button
-                className="btn btn-primary"
-                onClick={() => setIsAuthOpen(true)}
-                type="button"
-              >
-                Sign in
-              </button>
-            </div>
+        <section className="bg-muted flex min-h-96 flex-col items-center justify-center rounded-lg p-8 text-center">
+          <div className="max-w-md">
+            <h1 className="text-4xl font-bold">Sign in to manage settings</h1>
+            <p className="text-muted-foreground py-4">
+              Profile, avatar, and daily reminder controls require an account.
+            </p>
+            <Button onClick={() => setIsAuthOpen(true)} type="button">
+              Sign in
+            </Button>
           </div>
         </section>
         <AuthDialog close={() => setIsAuthOpen(false)} isOpen={isAuthOpen} />
@@ -46,34 +42,37 @@ export function SettingsProfile() {
     <div className="flex flex-col gap-8">
       <header className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
-          <div className="badge badge-secondary badge-soft mb-3 gap-2">
+          <Badge className="mb-3 gap-2" variant="secondary">
             <Settings aria-hidden="true" size={16} />
             Account Settings
-          </div>
-          <h1 className="text-4xl font-black">Tune your learning profile</h1>
-          <p className="text-base-content/65 mt-3 max-w-2xl">
+          </Badge>
+          <h1 className="text-4xl font-bold">Tune your learning profile</h1>
+          <p className="text-muted-foreground mt-3 max-w-2xl">
             Keep your profile fresh and configure reminders for daily practice.
           </p>
         </div>
         <div className="flex gap-2">
-          <button className="btn" onClick={state.reset} type="button">
+          <Button onClick={state.reset} type="button" variant="outline">
             Reset
-          </button>
-          <button
-            className="btn btn-primary"
+          </Button>
+          <Button
             disabled={state.isSaving}
             onClick={() => void state.save()}
             type="button"
           >
             {state.isSaving ? "Saving..." : "Save"}
-          </button>
+          </Button>
         </div>
       </header>
       {state.error ? (
-        <div className="alert alert-error">{state.error}</div>
+        <Alert variant="destructive">
+          <AlertDescription>{state.error}</AlertDescription>
+        </Alert>
       ) : null}
       {state.success ? (
-        <div className="alert alert-success">{state.success}</div>
+        <Alert variant="success">
+          <AlertDescription>{state.success}</AlertDescription>
+        </Alert>
       ) : null}
       <div className="grid gap-6 lg:grid-cols-[0.9fr_1.4fr]">
         <div className="flex flex-col gap-6">

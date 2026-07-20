@@ -1,6 +1,9 @@
 import { Brain, Mic, Pause, Search, Send } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { useSpeechToText } from "../../shared/browser";
+import { Button } from "../../shared/ui/components/button";
+import { CardContent, CardFooter } from "../../shared/ui/components/card";
+import { Textarea } from "../../shared/ui/components/textarea";
 
 export type ChatComposerPayload = {
   readonly content: string;
@@ -33,27 +36,31 @@ export function ChatComposer({
   };
 
   return (
-    <form className="card bg-base-100 shadow-xl" onSubmit={submit}>
-      <div className="card-body gap-4">
+    <form
+      className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-xl"
+      onSubmit={submit}
+    >
+      <CardContent className="flex flex-col gap-4">
         <div className="flex flex-wrap gap-2">
-          <button
-            className="btn btn-sm"
+          <Button
             onClick={() => setDeepThink((value) => !value)}
+            size="sm"
             type="button"
+            variant={deepThink ? "default" : "outline"}
           >
             <Brain aria-hidden="true" size={16} />
             {deepThink ? "Deep think on" : "Deep think"}
-          </button>
-          <button
-            className="btn btn-sm"
+          </Button>
+          <Button
             onClick={() => setWebSearch((value) => !value)}
+            size="sm"
             type="button"
+            variant={webSearch ? "default" : "outline"}
           >
             <Search aria-hidden="true" size={16} />
             {webSearch ? "Web search on" : "Web search"}
-          </button>
-          <button
-            className="btn btn-sm"
+          </Button>
+          <Button
             disabled={!speech.isSupported}
             onClick={() => {
               if (speech.isRecording) {
@@ -62,7 +69,9 @@ export function ChatComposer({
                 speech.start(setContent);
               }
             }}
+            size="sm"
             type="button"
+            variant={speech.isRecording ? "default" : "outline"}
           >
             {speech.isRecording ? (
               <Pause aria-hidden="true" size={16} />
@@ -70,26 +79,22 @@ export function ChatComposer({
               <Mic aria-hidden="true" size={16} />
             )}
             {speech.isSupported ? "Voice input" : "Speech unavailable"}
-          </button>
+          </Button>
         </div>
-        <textarea
-          className="textarea textarea-bordered min-h-24 w-full"
+        <Textarea
+          className="min-h-24"
           disabled={isDisabled || isStreaming}
           onChange={(event) => setContent(event.target.value)}
           placeholder="Ask for corrections, role-play, or vocabulary examples..."
           value={content}
         />
-        <div className="card-actions justify-end">
-          <button
-            className="btn btn-primary"
-            disabled={isDisabled || isStreaming}
-            type="submit"
-          >
-            <Send aria-hidden="true" size={18} />
-            {isStreaming ? "Streaming..." : "Send"}
-          </button>
-        </div>
-      </div>
+      </CardContent>
+      <CardFooter className="justify-end">
+        <Button disabled={isDisabled || isStreaming} type="submit">
+          <Send aria-hidden="true" size={18} />
+          {isStreaming ? "Streaming..." : "Send"}
+        </Button>
+      </CardFooter>
     </form>
   );
 }

@@ -1,5 +1,6 @@
 import { useAppServices } from "../../app/use-app-services";
 import { EmptyState, ErrorState, LoadingState } from "../../shared/ui";
+import { Badge } from "@/shared/ui/components/badge";
 import { CourseCard } from "./course-card";
 import { useCourseCatalog } from "./use-course-catalog";
 
@@ -10,11 +11,11 @@ export function CourseCatalog() {
   return (
     <div className="flex flex-col gap-8">
       <header className="text-center">
-        <div className="badge badge-primary badge-soft mb-3">
+        <Badge className="bg-primary/10 text-primary mb-3" variant="secondary">
           Vocabulary Courses
-        </div>
+        </Badge>
         <h1 className="text-4xl font-black">Curated vocabulary tracks</h1>
-        <p className="text-base-content/65 mx-auto mt-3 max-w-2xl">
+        <p className="text-muted-foreground mx-auto mt-3 max-w-2xl">
           Pick a track and start practicing with focused word batches.
         </p>
       </header>

@@ -1,6 +1,10 @@
 import { Lock, Mail, Phone, User } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { useAppServices } from "../../app/use-app-services";
+import { Alert, AlertDescription } from "@/shared/ui/components/alert";
+import { Button } from "@/shared/ui/components/button";
+import { Field, FieldGroup, FieldLabel } from "@/shared/ui/components/field";
+import { Input } from "@/shared/ui/components/input";
 import type { AuthFormProps } from "./auth-form-props";
 import { RegisterFormSchema } from "./auth-form-schema";
 import { getFormError, getUnknownErrorMessage } from "./form-error";
@@ -34,42 +38,101 @@ export function RegisterForm({ close, setMode }: AuthFormProps) {
   };
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={submit}>
+    <form className="flex flex-col gap-5" onSubmit={submit}>
       <div>
-        <h2 className="text-3xl font-black">Create your account</h2>
-        <p className="text-base-content/60 text-sm">
+        <h2 className="font-display text-3xl font-bold tracking-tight">
+          Create your account
+        </h2>
+        <p className="text-muted-foreground text-sm">
           Save vocabulary, streaks, and AI chat progress.
         </p>
       </div>
-      <label className="input input-bordered flex items-center gap-2">
-        <User aria-hidden="true" size={18} />
-        <input name="name" placeholder="Name" />
-      </label>
-      <label className="input input-bordered flex items-center gap-2">
-        <Phone aria-hidden="true" size={18} />
-        <input maxLength={11} name="phone" placeholder="Phone number" />
-      </label>
-      <label className="input input-bordered flex items-center gap-2">
-        <Mail aria-hidden="true" size={18} />
-        <input name="email" placeholder="Email" type="email" />
-      </label>
-      <label className="input input-bordered flex items-center gap-2">
-        <Lock aria-hidden="true" size={18} />
-        <input name="password" placeholder="Password" type="password" />
-      </label>
-      {error ? <div className="alert alert-error py-2">{error}</div> : null}
-      <button className="btn btn-primary" disabled={isSubmitting} type="submit">
+      <FieldGroup>
+        <Field>
+          <FieldLabel htmlFor="register-name">Name</FieldLabel>
+          <div className="relative">
+            <User
+              aria-hidden="true"
+              className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
+              size={18}
+            />
+            <Input
+              className="pl-9"
+              id="register-name"
+              name="name"
+              placeholder="Name"
+            />
+          </div>
+        </Field>
+        <Field>
+          <FieldLabel htmlFor="register-phone">Phone number</FieldLabel>
+          <div className="relative">
+            <Phone
+              aria-hidden="true"
+              className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
+              size={18}
+            />
+            <Input
+              className="pl-9"
+              id="register-phone"
+              maxLength={11}
+              name="phone"
+              placeholder="Phone number"
+            />
+          </div>
+        </Field>
+        <Field>
+          <FieldLabel htmlFor="register-email">Email</FieldLabel>
+          <div className="relative">
+            <Mail
+              aria-hidden="true"
+              className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
+              size={18}
+            />
+            <Input
+              className="pl-9"
+              id="register-email"
+              name="email"
+              placeholder="Email"
+              type="email"
+            />
+          </div>
+        </Field>
+        <Field>
+          <FieldLabel htmlFor="register-password">Password</FieldLabel>
+          <div className="relative">
+            <Lock
+              aria-hidden="true"
+              className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
+              size={18}
+            />
+            <Input
+              className="pl-9"
+              id="register-password"
+              name="password"
+              placeholder="Password"
+              type="password"
+            />
+          </div>
+        </Field>
+      </FieldGroup>
+      {error ? (
+        <Alert className="py-2" variant="destructive">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      ) : null}
+      <Button disabled={isSubmitting} type="submit">
         {isSubmitting ? "Creating..." : "Create account"}
-      </button>
-      <button
-        className="btn btn-link"
+      </Button>
+      <Button
         onClick={() => {
           setMode("login");
         }}
         type="button"
+        variant="link"
       >
         I already have an account
-      </button>
+      </Button>
     </form>
   );
 }

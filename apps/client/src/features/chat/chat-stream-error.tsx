@@ -1,4 +1,10 @@
 import { RotateCcw, TriangleAlert } from "lucide-react";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "../../shared/ui/components/alert";
+import { Button } from "../../shared/ui/components/button";
 
 export type ChatStreamErrorProps = {
   readonly message: string;
@@ -7,16 +13,16 @@ export type ChatStreamErrorProps = {
 
 export function ChatStreamError({ message, retry }: ChatStreamErrorProps) {
   return (
-    <div className="alert alert-error items-start">
+    <Alert className="items-start" variant="destructive">
       <TriangleAlert aria-hidden="true" size={22} />
-      <div className="flex flex-1 flex-col gap-1">
-        <h2 className="font-bold">Streaming interrupted</h2>
+      <AlertTitle className="font-bold">Streaming interrupted</AlertTitle>
+      <AlertDescription className="flex items-center justify-between gap-3">
         <p className="text-sm">{message}</p>
-      </div>
-      <button className="btn btn-sm" onClick={retry} type="button">
-        <RotateCcw aria-hidden="true" size={16} />
-        Retry
-      </button>
-    </div>
+        <Button onClick={retry} size="sm" type="button">
+          <RotateCcw aria-hidden="true" size={16} />
+          Retry
+        </Button>
+      </AlertDescription>
+    </Alert>
   );
 }

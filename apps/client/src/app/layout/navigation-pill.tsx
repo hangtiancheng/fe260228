@@ -1,5 +1,6 @@
-import clsx from "clsx";
+import { motion } from "motion/react";
 import type { AppNavigationItem } from "../../shared/navigation";
+import { cn } from "@/shared/ui/lib/utils";
 
 export type NavigationPillProps = {
   readonly activePath: string;
@@ -8,19 +9,27 @@ export type NavigationPillProps = {
 
 export function NavigationPill({ activePath, item }: NavigationPillProps) {
   const Icon = item.icon;
+  const isActive = activePath === item.path;
 
   return (
     <a
-      className={clsx(
-        "btn btn-sm rounded-full",
-        activePath === item.path
-          ? "btn-primary"
-          : "btn-ghost text-base-content/70",
+      className={cn(
+        "relative inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
+        isActive
+          ? "text-primary-foreground"
+          : "text-muted-foreground hover:text-foreground",
       )}
       href={item.path}
     >
-      <Icon aria-hidden="true" size={16} />
-      <span className="hidden lg:inline">{item.label}</span>
+      {isActive ? (
+        <motion.span
+          layoutId="nav-pill-bg"
+          className="bg-primary absolute inset-0 rounded-full"
+          transition={{ type: "spring", stiffness: 400, damping: 32 }}
+        />
+      ) : null}
+      <Icon aria-hidden="true" className="relative size-4" size={16} />
+      <span className="relative hidden lg:inline">{item.label}</span>
     </a>
   );
 }

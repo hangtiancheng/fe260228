@@ -43,7 +43,7 @@ describe("SpellingGrid", () => {
     const secondLetter = screen.getByLabelText("Letter 2");
     fireEvent.change(firstLetter, { target: { value: "a" } });
 
-    expect(firstLetter).toHaveClass("input-success");
+    expect(firstLetter).toHaveClass("border-success");
     expect(secondLetter).toHaveFocus();
   });
 

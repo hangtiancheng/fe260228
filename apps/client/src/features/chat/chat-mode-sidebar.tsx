@@ -1,6 +1,12 @@
-import clsx from "clsx";
 import { Bot } from "lucide-react";
 import type { ChatMode, ChatRoleType } from "../../shared/api/chat-schema";
+import { Button } from "../../shared/ui/components/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../shared/ui/components/card";
 
 export type ChatModeSidebarProps = {
   readonly activeRole: ChatRoleType | null;
@@ -14,30 +20,28 @@ export function ChatModeSidebar({
   selectRole,
 }: ChatModeSidebarProps) {
   return (
-    <aside className="card bg-base-200 shadow-sm">
-      <div className="card-body gap-3">
-        <h2 className="card-title text-base">
+    <Card className="bg-secondary/60 backdrop-blur-md">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 text-base">
           <Bot aria-hidden="true" size={18} />
           Conversation roles
-        </h2>
-        <div className="flex flex-col gap-2">
-          {modes.map((mode) => (
-            <button
-              className={clsx(
-                "btn justify-start",
-                activeRole === mode.role ? "btn-primary" : "btn-ghost",
-              )}
-              key={mode.id}
-              onClick={() => {
-                selectRole(mode.role);
-              }}
-              type="button"
-            >
-              {mode.label}
-            </button>
-          ))}
-        </div>
-      </div>
-    </aside>
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-2">
+        {modes.map((mode) => (
+          <Button
+            className="justify-start"
+            key={mode.id}
+            onClick={() => {
+              selectRole(mode.role);
+            }}
+            type="button"
+            variant={activeRole === mode.role ? "default" : "ghost"}
+          >
+            {mode.label}
+          </Button>
+        ))}
+      </CardContent>
+    </Card>
   );
 }

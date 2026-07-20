@@ -20,6 +20,9 @@ function getManualChunk(id: string) {
   }
   if (id.includes("/zustand/") || id.includes("/jotai/")) return "vendor-state";
   if (id.includes("/lucide-react/")) return "vendor-icons";
+  if (id.includes("/motion/") || id.includes("/framer-motion/"))
+    return "vendor-motion";
+  if (id.includes("/gsap/") || id.includes("/@gsap/")) return "vendor-gsap";
 
   return "vendor";
 }
@@ -61,8 +64,4 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
-
-  // optimizeDeps: {
-  //   exclude: ["swifty-sentry"],
-  // },
 });

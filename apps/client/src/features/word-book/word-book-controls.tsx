@@ -1,6 +1,9 @@
-import clsx from "clsx";
 import { Search } from "lucide-react";
 import type { FormEvent } from "react";
+import { Button } from "@/shared/ui/components/button";
+import { Card, CardContent, CardFooter } from "@/shared/ui/components/card";
+import { Field, FieldLabel } from "@/shared/ui/components/field";
+import { Input } from "@/shared/ui/components/input";
 import {
   wordFilterOptions,
   type WordBookFilters,
@@ -26,40 +29,48 @@ export function WordBookControls({
   };
 
   return (
-    <form className="card bg-base-100 shadow-xl" onSubmit={submit}>
-      <div className="card-body gap-4">
-        <label className="input input-bordered flex w-full items-center gap-2">
-          <Search aria-hidden="true" size={18} />
-          <input
-            name="word"
-            onChange={(event) => setWord(event.target.value)}
-            placeholder="Search a word"
-            value={filters.word}
-          />
-        </label>
-        <div className="flex flex-wrap gap-2">
-          {wordFilterOptions.map((option) => (
-            <button
-              className={clsx(
-                "btn btn-sm rounded-full",
-                filters.selected.has(option.key)
-                  ? "btn-primary"
-                  : "btn-outline",
-              )}
-              key={option.key}
-              onClick={() => toggleFilter(option.key)}
-              type="button"
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary" type="submit">
-            Search
-          </button>
-        </div>
-      </div>
+    <form onSubmit={submit}>
+      <Card className="shadow-sm">
+        <CardContent className="flex flex-col gap-4">
+          <Field>
+            <FieldLabel htmlFor="word">Word</FieldLabel>
+            <div className="relative">
+              <Search
+                aria-hidden="true"
+                className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
+                size={18}
+              />
+              <Input
+                className="pl-9"
+                id="word"
+                name="word"
+                onChange={(event) => setWord(event.target.value)}
+                placeholder="Search a word"
+                value={filters.word}
+              />
+            </div>
+          </Field>
+          <div className="flex flex-wrap gap-2">
+            {wordFilterOptions.map((option) => (
+              <Button
+                className="rounded-full"
+                key={option.key}
+                onClick={() => toggleFilter(option.key)}
+                size="sm"
+                type="button"
+                variant={
+                  filters.selected.has(option.key) ? "default" : "outline"
+                }
+              >
+                {option.label}
+              </Button>
+            ))}
+          </div>
+        </CardContent>
+        <CardFooter className="justify-end">
+          <Button type="submit">Search</Button>
+        </CardFooter>
+      </Card>
     </form>
   );
 }

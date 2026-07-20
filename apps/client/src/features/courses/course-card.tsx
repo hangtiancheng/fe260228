@@ -1,5 +1,14 @@
 import { BookOpen, GraduationCap } from "lucide-react";
+import { motion } from "motion/react";
 import type { Course } from "../../shared/api/course-schema";
+import { Badge } from "@/shared/ui/components/badge";
+import { Button } from "@/shared/ui/components/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/shared/ui/components/card";
 import { createCourseImageUrl } from "./course-image";
 
 export type CourseCardProps = {
@@ -12,38 +21,53 @@ export function CourseCard({ course, serverBaseUrl }: CourseCardProps) {
   const learnUrl = `/courses/learn/${encodeURIComponent(course.id)}/${encodeURIComponent(course.name)}`;
 
   return (
-    <article className="card bg-base-100 shadow-xl transition hover:-translate-y-1 hover:shadow-2xl">
-      <figure className="bg-base-300 relative aspect-4/3">
-        <img
-          alt={course.name}
-          className="size-full object-cover"
-          src={imageUrl}
-        />
-        <span className="badge badge-primary badge-soft absolute top-4 left-4">
-          Vocabulary
-        </span>
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">{course.name}</h2>
-        <p className="text-base-content/65 line-clamp-2 text-sm">
-          {course.description ?? "Focused vocabulary practice course."}
-        </p>
-        <div className="border-base-300 flex items-center justify-between border-t pt-4">
-          <span className="text-base-content/55 flex items-center gap-2 text-sm">
-            <GraduationCap aria-hidden="true" size={16} />
-            {course.teacher}
-          </span>
-          <span className="text-primary text-xl font-black">
-            ¥{course.price}
-          </span>
+    <motion.div
+      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+      whileHover={{ y: -4 }}
+      whileTap={{ scale: 0.98 }}
+    >
+      <Card className="overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+        <div className="bg-muted relative -mt-6 aspect-4/3 overflow-hidden rounded-t-lg">
+          <img
+            alt={course.name}
+            className="size-full object-cover"
+            src={imageUrl}
+          />
+          <Badge
+            className="bg-primary/10 text-primary absolute top-4 left-4"
+            variant="secondary"
+          >
+            Vocabulary
+          </Badge>
         </div>
-        <div className="card-actions mt-2">
-          <a className="btn btn-primary w-full" href={learnUrl}>
-            <BookOpen aria-hidden="true" size={18} />
-            Start learning
-          </a>
-        </div>
-      </div>
-    </article>
+        <CardHeader>
+          <h3 className="font-display text-lg leading-none font-semibold tracking-tight">
+            {course.name}
+          </h3>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground line-clamp-2 text-sm">
+            {course.description ?? "Focused vocabulary practice course."}
+          </p>
+          <div className="flex items-center justify-between border-t pt-4">
+            <span className="text-muted-foreground flex items-center gap-2 text-sm">
+              <GraduationCap aria-hidden="true" size={16} />
+              {course.teacher}
+            </span>
+            <span className="text-primary text-xl font-black">
+              ¥{course.price}
+            </span>
+          </div>
+        </CardContent>
+        <CardFooter>
+          <Button asChild className="w-full">
+            <a href={learnUrl}>
+              <BookOpen aria-hidden="true" size={18} />
+              Start learning
+            </a>
+          </Button>
+        </CardFooter>
+      </Card>
+    </motion.div>
   );
 }

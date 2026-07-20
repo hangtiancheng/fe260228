@@ -1,5 +1,12 @@
 import { LogOut } from "lucide-react";
 import type { WebUser } from "../../shared/api";
+import { Button } from "@/shared/ui/components/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/shared/ui/components/card";
 
 export type AccountCardProps = {
   readonly logout: () => void;
@@ -8,28 +15,34 @@ export type AccountCardProps = {
 
 export function AccountCard({ logout, user }: AccountCardProps) {
   return (
-    <section className="card bg-base-100 shadow-xl">
-      <div className="card-body gap-4">
-        <h2 className="card-title">Account</h2>
-        <div className="stats stats-vertical bg-base-200">
-          <div className="stat">
-            <div className="stat-title">Words mastered</div>
-            <div className="stat-value text-primary">{user.wordNumber}</div>
+    <Card>
+      <CardHeader>
+        <CardTitle>Account</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-muted rounded-lg p-4">
+              <div className="text-muted-foreground text-sm">
+                Words mastered
+              </div>
+              <div className="font-display text-primary text-2xl font-bold">
+                {user.wordNumber}
+              </div>
+            </div>
+            <div className="bg-muted rounded-lg p-4">
+              <div className="text-muted-foreground text-sm">Practice days</div>
+              <div className="font-display text-foreground text-2xl font-bold">
+                {user.dayNumber}
+              </div>
+            </div>
           </div>
-          <div className="stat">
-            <div className="stat-title">Practice days</div>
-            <div className="stat-value text-secondary">{user.dayNumber}</div>
-          </div>
+          <Button onClick={logout} type="button" variant="destructive">
+            <LogOut aria-hidden="true" size={18} />
+            Sign out
+          </Button>
         </div>
-        <button
-          className="btn btn-error btn-outline"
-          onClick={logout}
-          type="button"
-        >
-          <LogOut aria-hidden="true" size={18} />
-          Sign out
-        </button>
-      </div>
-    </section>
+      </CardContent>
+    </Card>
   );
 }

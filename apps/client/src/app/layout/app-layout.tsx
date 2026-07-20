@@ -8,11 +8,16 @@ export type AppLayoutProps = {
 
 export function AppLayout({ activePath, children }: AppLayoutProps) {
   return (
-    <div className="bg-base-100 text-base-content min-h-dvh">
-      <AppHeader activePath={activePath} />
-      <main aria-label="fe260228" className="mx-auto max-w-7xl px-4 py-8">
-        {children}
-      </main>
+    <div
+      id="smooth-wrapper"
+      className="bg-background text-foreground min-h-dvh bg-[radial-gradient(circle_at_20%_0%,oklch(0.95_0.04_230),transparent_40%)]"
+    >
+      <div id="smooth-content">
+        <AppHeader activePath={activePath} />
+        <main aria-label="fe260228" className="mx-auto max-w-7xl px-4 py-8">
+          {children}
+        </main>
+      </div>
     </div>
   );
 }

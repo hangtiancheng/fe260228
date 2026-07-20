@@ -1,3 +1,5 @@
+import { Button } from "@/shared/ui/components/button";
+
 export type WordBookPaginationProps = {
   readonly page: number;
   readonly setPage: (page: number) => void;
@@ -12,26 +14,28 @@ export function WordBookPagination({
   totalPages,
 }: WordBookPaginationProps) {
   return (
-    <div className="join mx-auto">
-      <button
-        className="btn join-item"
+    <div className="mx-auto flex gap-0">
+      <Button
+        className="rounded-l-md rounded-r-none"
         disabled={page <= 1}
         onClick={() => setPage(page - 1)}
         type="button"
+        variant="outline"
       >
         Previous
-      </button>
-      <span className="btn join-item no-animation">
+      </Button>
+      <span className="bg-background dark:border-input dark:bg-input/30 inline-flex h-9 items-center rounded-none border border-x-0 px-4 text-sm">
         Page {page} / {totalPages} · {total} words
       </span>
-      <button
-        className="btn join-item"
+      <Button
+        className="rounded-l-none rounded-r-md"
         disabled={page >= totalPages}
         onClick={() => setPage(page + 1)}
         type="button"
+        variant="outline"
       >
         Next
-      </button>
+      </Button>
     </div>
   );
 }

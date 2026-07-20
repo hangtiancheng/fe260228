@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+import { Badge } from "@/shared/ui/components/badge";
 
 export type PageShellProps = {
   readonly description: string;
@@ -14,20 +15,16 @@ export function PageShell({
   title,
 }: PageShellProps) {
   return (
-    <section className="hero rounded-box bg-base-200 min-h-112">
-      <div className="hero-content text-center">
-        <div className="flex max-w-2xl flex-col items-center gap-5">
-          <div className="badge badge-primary badge-lg gap-2">
-            <Icon aria-hidden="true" size={18} />
-            {kicker}
-          </div>
-          <h1 className="text-4xl font-black tracking-tight md:text-6xl">
-            {title}
-          </h1>
-          <p className="text-base-content/70 text-lg leading-8">
-            {description}
-          </p>
-        </div>
+    <section className="bg-muted flex min-h-112 items-center justify-center rounded-lg">
+      <div className="flex max-w-2xl flex-col items-center gap-5 text-center">
+        <Badge className="bg-primary/10 text-primary gap-2 px-3 py-1">
+          <Icon aria-hidden="true" size={16} />
+          {kicker}
+        </Badge>
+        <h1 className="font-display text-4xl font-bold tracking-tight md:text-6xl">
+          {title}
+        </h1>
+        <p className="text-muted-foreground text-lg leading-8">{description}</p>
       </div>
     </section>
   );

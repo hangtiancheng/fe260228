@@ -1,6 +1,13 @@
-import clsx from "clsx";
 import type { KeyboardEvent } from "react";
 import { useRef } from "react";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/shared/ui/components/card";
+import { Input } from "@/shared/ui/components/input";
+import { cn } from "@/shared/ui/lib/utils";
 import type { SpellingCell } from "./spelling-state";
 
 export type SpellingGridProps = {
@@ -56,17 +63,19 @@ export function SpellingGrid({ cells, updateCell }: SpellingGridProps) {
   };
 
   return (
-    <section className="card bg-base-100 shadow-xl">
-      <div className="card-body">
-        <h2 className="card-title">Spell the word</h2>
+    <Card>
+      <CardHeader>
+        <CardTitle>Spell the word</CardTitle>
+      </CardHeader>
+      <CardContent>
         <div className="flex flex-wrap justify-center gap-3">
           {cells.map((cell, index) => (
-            <input
+            <Input
               aria-label={`Letter ${index + 1}`}
-              className={clsx(
-                "input input-bordered w-12 text-center text-2xl font-black",
-                cell.isCorrect === true && "input-success",
-                cell.isCorrect === false && "input-error",
+              className={cn(
+                "h-12 w-12 text-center text-2xl font-bold transition-colors",
+                cell.isCorrect === true && "border-success",
+                cell.isCorrect === false && "border-destructive",
               )}
               key={`${cell.expected}-${index}`}
               maxLength={1}
@@ -77,7 +86,7 @@ export function SpellingGrid({ cells, updateCell }: SpellingGridProps) {
             />
           ))}
         </div>
-      </div>
-    </section>
+      </CardContent>
+    </Card>
   );
 }

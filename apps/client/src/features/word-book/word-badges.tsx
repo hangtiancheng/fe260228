@@ -1,4 +1,5 @@
 import type { Word } from "../../shared/api/word-schema";
+import { Badge } from "@/shared/ui/components/badge";
 import { wordFilterOptions } from "./word-filter";
 
 export type WordBadgesProps = {
@@ -13,9 +14,13 @@ export function WordBadges({ word }: WordBadgesProps) {
   return (
     <div className="flex flex-wrap gap-2">
       {labels.map((option) => (
-        <span className="badge badge-primary badge-soft" key={option.key}>
+        <Badge
+          className="bg-primary/10 text-primary"
+          key={option.key}
+          variant="secondary"
+        >
           {option.label}
-        </span>
+        </Badge>
       ))}
     </div>
   );

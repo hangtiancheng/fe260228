@@ -1,5 +1,14 @@
 import type { Dispatch, SetStateAction } from "react";
 import type { SettingsForm } from "./settings-form";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/shared/ui/components/card";
+import { Field, FieldGroup, FieldLabel } from "@/shared/ui/components/field";
+import { Input } from "@/shared/ui/components/input";
+import { Textarea } from "@/shared/ui/components/textarea";
 
 export type ProfileFormProps = {
   readonly form: SettingsForm;
@@ -15,44 +24,48 @@ export function ProfileForm({ form, setForm }: ProfileFormProps) {
   };
 
   return (
-    <section className="card bg-base-100 shadow-xl">
-      <div className="card-body gap-4">
-        <h2 className="card-title">Profile</h2>
-        <label className="form-control">
-          <span className="label-text">Name</span>
-          <input
-            className="input input-bordered"
-            onChange={(event) => update("name", event.target.value)}
-            value={form.name}
-          />
-        </label>
-        <label className="form-control">
-          <span className="label-text">Email</span>
-          <input
-            className="input input-bordered"
-            onChange={(event) => update("email", event.target.value)}
-            type="email"
-            value={form.email}
-          />
-        </label>
-        <label className="form-control">
-          <span className="label-text">Address</span>
-          <input
-            className="input input-bordered"
-            onChange={(event) => update("address", event.target.value)}
-            value={form.address}
-          />
-        </label>
-        <label className="form-control">
-          <span className="label-text">Bio</span>
-          <textarea
-            className="textarea textarea-bordered"
-            maxLength={120}
-            onChange={(event) => update("bio", event.target.value)}
-            value={form.bio}
-          />
-        </label>
-      </div>
-    </section>
+    <Card>
+      <CardHeader>
+        <CardTitle>Profile</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <FieldGroup>
+          <Field>
+            <FieldLabel htmlFor="settings-name">Name</FieldLabel>
+            <Input
+              id="settings-name"
+              onChange={(event) => update("name", event.target.value)}
+              value={form.name}
+            />
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="settings-email">Email</FieldLabel>
+            <Input
+              id="settings-email"
+              onChange={(event) => update("email", event.target.value)}
+              type="email"
+              value={form.email}
+            />
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="settings-address">Address</FieldLabel>
+            <Input
+              id="settings-address"
+              onChange={(event) => update("address", event.target.value)}
+              value={form.address}
+            />
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="settings-bio">Bio</FieldLabel>
+            <Textarea
+              id="settings-bio"
+              maxLength={120}
+              onChange={(event) => update("bio", event.target.value)}
+              value={form.bio}
+            />
+          </Field>
+        </FieldGroup>
+      </CardContent>
+    </Card>
   );
 }

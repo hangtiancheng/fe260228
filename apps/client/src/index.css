@@ -1,6 +1,117 @@
 @import "tailwindcss";
 
-@plugin "daisyui";
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC",
+    "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "Geist Mono", "Maple Mono", "SF Mono", Menlo, monospace;
+  --font-display: "Geist Mono", "Maple Mono", var(--font-sans);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  --background: oklch(0.99 0.005 235);
+  --foreground: oklch(0.22 0.02 240);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.02 240);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.02 240);
+  --primary: oklch(0.58 0.16 245);
+  --primary-foreground: oklch(0.99 0.005 235);
+  --secondary: oklch(0.95 0.02 240);
+  --secondary-foreground: oklch(0.3 0.03 240);
+  --muted: oklch(0.96 0.012 240);
+  --muted-foreground: oklch(0.5 0.02 240);
+  --accent: oklch(0.93 0.04 230);
+  --accent-foreground: oklch(0.3 0.05 240);
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.99 0.005 235);
+  --success: oklch(0.7 0.17 155);
+  --success-foreground: oklch(0.99 0.005 235);
+  --warning: oklch(0.78 0.16 75);
+  --warning-foreground: oklch(0.22 0.02 240);
+  --border: oklch(0.92 0.015 240);
+  --input: oklch(0.92 0.015 240);
+  --ring: oklch(0.58 0.16 245);
+}
+
+.dark {
+  --background: oklch(0.18 0.015 240);
+  --foreground: oklch(0.95 0.01 240);
+  --card: oklch(0.22 0.018 240);
+  --card-foreground: oklch(0.95 0.01 240);
+  --popover: oklch(0.22 0.018 240);
+  --popover-foreground: oklch(0.95 0.01 240);
+  --primary: oklch(0.7 0.15 245);
+  --primary-foreground: oklch(0.18 0.015 240);
+  --secondary: oklch(0.28 0.02 240);
+  --secondary-foreground: oklch(0.92 0.01 240);
+  --muted: oklch(0.26 0.018 240);
+  --muted-foreground: oklch(0.68 0.02 240);
+  --accent: oklch(0.32 0.05 230);
+  --accent-foreground: oklch(0.92 0.02 240);
+  --destructive: oklch(0.68 0.22 25);
+  --destructive-foreground: oklch(0.99 0.005 235);
+  --success: oklch(0.72 0.17 155);
+  --success-foreground: oklch(0.18 0.015 240);
+  --warning: oklch(0.8 0.16 75);
+  --warning-foreground: oklch(0.18 0.015 240);
+  --border: oklch(0.3 0.02 240 / 0.6);
+  --input: oklch(0.3 0.02 240);
+  --ring: oklch(0.7 0.15 245);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+
+  ::selection {
+    @apply bg-primary/20;
+  }
+}
 
 @keyframes word-marquee-left {
   from {
@@ -22,19 +133,34 @@
   }
 }
 
-/* Override daisyUI input/textarea focus styles to use 1px orange border */
-.input:focus,
-.input:focus-within,
-.textarea:focus,
-.textarea:focus-within {
-  @apply border-(--color-primary) shadow-none outline-none;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
-:root {
-  --font-sans:
-    "Geist Mono", "Swifty", "Maple Mono", "Menlo", "Cascadia Code",
-    "PingFang SC", "Microsoft YaHei", monospace !important;
-  --font-mono: var(--font-sans);
+@media (prefers-reduced-transparency: reduce) {
+  .backdrop-blur-xl,
+  .backdrop-blur-md,
+  .backdrop-blur-sm,
+  .backdrop-blur {
+    backdrop-filter: none !important;
+  }
 
-  font-family: var(--font-sans);
+  .bg-background\/70,
+  .bg-background\/80,
+  .bg-background\/90,
+  .bg-secondary\/60 {
+    background-color: var(--background) !important;
+  }
+}
+
+.toaster {
+  --normal-bg: var(--popover);
+  --normal-text: var(--popover-foreground);
+  --normal-border: var(--border);
+  --border-radius: var(--radius);
 }
