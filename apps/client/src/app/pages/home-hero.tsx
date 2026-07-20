@@ -51,7 +51,7 @@ export function HomeHero({ isSignedIn, openAuth }: HomeHeroProps) {
           </CardContent>
         </CardHeader>
       </Card>
-      <div className="home-hero-visual">
+      <div className="home-hero-visual min-w-0">
         <WordMarquee />
       </div>
     </section>

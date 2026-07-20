@@ -8,8 +8,8 @@ export type ChatAuthGateProps = {
 
 export function ChatAuthGate({ openAuth }: ChatAuthGateProps) {
   return (
-    <Alert variant="warning">
-      <LockKeyhole aria-hidden="true" />
+    <Alert className="[&>svg]:translate-y-0" variant="warning">
+      <LockKeyhole aria-hidden="true" className="self-center" />
       <AlertDescription className="flex flex-wrap items-center gap-3">
         <span>Sign in to load chat history and stream AI responses.</span>
         <Button onClick={openAuth} size="sm" type="button">
