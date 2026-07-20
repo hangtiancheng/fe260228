@@ -15,7 +15,7 @@ export function HomeHero({ isSignedIn, openAuth }: HomeHeroProps) {
       <Card className="from-primary/10 to-accent/20 overflow-hidden border-0 bg-gradient-to-br shadow-lg backdrop-blur-md">
         <CardHeader className="gap-7 p-8 lg:p-12">
           <Badge className="bg-primary/15 text-primary w-fit gap-2 px-3 py-1">
-            <Sparkles aria-hidden="true" size={16} />
+            <Sparkles aria-hidden="true" />
             Five-day speaking streak starter
           </Badge>
           <div className="flex flex-col gap-4">
@@ -33,18 +33,18 @@ export function HomeHero({ isSignedIn, openAuth }: HomeHeroProps) {
               <Button asChild>
                 <a href="/chat/index">
                   Continue practice
-                  <ArrowRight aria-hidden="true" size={18} />
+                  <ArrowRight aria-hidden="true" />
                 </a>
               </Button>
             ) : (
               <Button onClick={openAuth} type="button">
                 Start learning
-                <ArrowRight aria-hidden="true" size={18} />
+                <ArrowRight aria-hidden="true" />
               </Button>
             )}
             <Button asChild variant="outline">
               <a href="/courses/index">
-                <BookOpen aria-hidden="true" size={18} />
+                <BookOpen aria-hidden="true" />
                 View courses
               </a>
             </Button>

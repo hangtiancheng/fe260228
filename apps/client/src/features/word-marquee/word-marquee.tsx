@@ -42,7 +42,7 @@ export function WordMarquee({
   return (
     <section
       aria-label="English word marquee"
-      className="relative min-h-96 overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 to-sky-950 text-white shadow-2xl"
+      className="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 to-sky-950 text-white shadow-2xl"
       data-speed="0.9"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,oklch(0.58_0.16_245/0.35),transparent_32%),radial-gradient(circle_at_78%_72%,oklch(0.7_0.17_155/0.28),transparent_34%)]" />
@@ -51,7 +51,7 @@ export function WordMarquee({
         <div className="flex items-start justify-between gap-4">
           <div>
             <Badge className="bg-primary text-primary-foreground gap-2 px-3 py-1">
-              <Sparkles aria-hidden="true" size={16} />
+              <Sparkles aria-hidden="true" />
               {eyebrow}
             </Badge>
             <h2 className="font-display mt-4 max-w-lg text-4xl leading-none font-bold tracking-tight">

@@ -14,7 +14,7 @@ export function MetricPill({ icon: Icon, label, value }: MetricPillProps) {
       variant="secondary"
       className="bg-primary/10 text-primary gap-2 px-4 py-2"
     >
-      <Icon aria-hidden="true" size={16} />
+      <Icon aria-hidden="true" />
       <span className="font-bold tabular-nums">{value}</span>
     </Badge>
   );

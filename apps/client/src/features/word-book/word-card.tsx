@@ -29,7 +29,7 @@ export function WordCard({ word }: WordCardProps) {
               type="button"
               variant="ghost"
             >
-              <Volume2 aria-hidden="true" size={14} />
+              <Volume2 aria-hidden="true" />
               {word.phonetic ?? "Play pronunciation"}
             </Button>
           </div>

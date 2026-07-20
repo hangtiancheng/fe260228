@@ -38,7 +38,7 @@ export function AccountCard({ logout, user }: AccountCardProps) {
             </div>
           </div>
           <Button onClick={logout} type="button" variant="destructive">
-            <LogOut aria-hidden="true" size={18} />
+            <LogOut aria-hidden="true" />
             Sign out
           </Button>
         </div>

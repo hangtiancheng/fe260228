@@ -29,9 +29,9 @@ export function WordDetailCard({
           type="button"
         >
           {isHidden ? (
-            <Eye aria-hidden="true" size={18} />
+            <Eye aria-hidden="true" />
           ) : (
-            <EyeOff aria-hidden="true" size={18} />
+            <EyeOff aria-hidden="true" />
           )}
           {isHidden ? "Show word" : "Hide word"}
         </Button>
@@ -47,7 +47,7 @@ export function WordDetailCard({
             onClick={() => speakText(word.word)}
             type="button"
           >
-            <Volume2 aria-hidden="true" size={16} />
+            <Volume2 aria-hidden="true" />
             {word.phonetic ?? "Play pronunciation"}
           </Button>
         </motion.div>

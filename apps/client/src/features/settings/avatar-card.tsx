@@ -40,7 +40,7 @@ export function AvatarCard({ avatarUrl, name, uploadAvatar }: AvatarCardProps) {
             </Avatar>
             <Button asChild>
               <label>
-                <Camera aria-hidden="true" size={18} />
+                <Camera aria-hidden="true" />
                 Select avatar
                 <input
                   accept="image/*"

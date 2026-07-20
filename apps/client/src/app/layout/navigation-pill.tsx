@@ -28,7 +28,7 @@ export function NavigationPill({ activePath, item }: NavigationPillProps) {
           transition={{ type: "spring", stiffness: 400, damping: 32 }}
         />
       ) : null}
-      <Icon aria-hidden="true" className="relative size-4" size={16} />
+      <Icon aria-hidden="true" className="relative size-4" />
       <span className="relative hidden lg:inline">{item.label}</span>
     </a>
   );

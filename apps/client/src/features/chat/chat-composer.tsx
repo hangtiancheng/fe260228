@@ -48,7 +48,7 @@ export function ChatComposer({
             type="button"
             variant={deepThink ? "default" : "outline"}
           >
-            <Brain aria-hidden="true" size={16} />
+            <Brain aria-hidden="true" />
             {deepThink ? "Deep think on" : "Deep think"}
           </Button>
           <Button
@@ -57,7 +57,7 @@ export function ChatComposer({
             type="button"
             variant={webSearch ? "default" : "outline"}
           >
-            <Search aria-hidden="true" size={16} />
+            <Search aria-hidden="true" />
             {webSearch ? "Web search on" : "Web search"}
           </Button>
           <Button
@@ -74,9 +74,9 @@ export function ChatComposer({
             variant={speech.isRecording ? "default" : "outline"}
           >
             {speech.isRecording ? (
-              <Pause aria-hidden="true" size={16} />
+              <Pause aria-hidden="true" />
             ) : (
-              <Mic aria-hidden="true" size={16} />
+              <Mic aria-hidden="true" />
             )}
             {speech.isSupported ? "Voice input" : "Speech unavailable"}
           </Button>
@@ -91,7 +91,7 @@ export function ChatComposer({
       </CardContent>
       <CardFooter className="justify-end">
         <Button disabled={isDisabled || isStreaming} type="submit">
-          <Send aria-hidden="true" size={18} />
+          <Send aria-hidden="true" />
           {isStreaming ? "Streaming..." : "Send"}
         </Button>
       </CardFooter>

@@ -61,16 +61,16 @@ export function ProfileMenu() {
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={toggleTheme}>
             {theme === "dark" ? (
-              <Sun aria-hidden="true" size={16} />
+              <Sun aria-hidden="true" />
             ) : (
-              <Moon aria-hidden="true" size={16} />
+              <Moon aria-hidden="true" />
             )}
             {theme === "dark" ? "Light mode" : "Dark mode"}
           </DropdownMenuItem>
           <div className="grid grid-cols-2 gap-2">
             <Button asChild size="sm" variant="outline">
               <a href="/setting/index">
-                <Settings aria-hidden="true" size={16} />
+                <Settings aria-hidden="true" />
                 Profile
               </a>
             </Button>
@@ -80,7 +80,7 @@ export function ProfileMenu() {
               type="button"
               variant="destructive"
             >
-              <LogOut aria-hidden="true" size={16} />
+              <LogOut aria-hidden="true" />
               Logout
             </Button>
           </div>

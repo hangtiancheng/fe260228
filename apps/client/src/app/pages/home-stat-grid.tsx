@@ -31,11 +31,7 @@ export function HomeStatGrid({ values }: HomeStatGridProps) {
                 {stat.label}
               </span>
             </div>
-            <Icon
-              aria-hidden="true"
-              className="text-primary size-7 shrink-0"
-              size={28}
-            />
+            <Icon aria-hidden="true" className="text-primary size-7 shrink-0" />
           </div>
         );
       })}

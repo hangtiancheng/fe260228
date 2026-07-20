@@ -14,12 +14,12 @@ export type ChatStreamErrorProps = {
 export function ChatStreamError({ message, retry }: ChatStreamErrorProps) {
   return (
     <Alert className="items-start" variant="destructive">
-      <TriangleAlert aria-hidden="true" size={22} />
+      <TriangleAlert aria-hidden="true" />
       <AlertTitle className="font-bold">Streaming interrupted</AlertTitle>
       <AlertDescription className="flex items-center justify-between gap-3">
         <p className="text-sm">{message}</p>
         <Button onClick={retry} size="sm" type="button">
-          <RotateCcw aria-hidden="true" size={16} />
+          <RotateCcw aria-hidden="true" />
           Retry
         </Button>
       </AlertDescription>

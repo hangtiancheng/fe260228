@@ -31,7 +31,7 @@ export function WordBook() {
           className="bg-primary/10 text-primary mb-3 gap-2 [&>svg]:size-4"
           variant="secondary"
         >
-          <BookOpen aria-hidden="true" size={16} />
+          <BookOpen aria-hidden="true" />
           Vocabulary Library
         </Badge>
         <h1 className="text-4xl font-bold">Explore the word book</h1>

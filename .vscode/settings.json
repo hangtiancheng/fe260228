@@ -11,12 +11,14 @@
     "kwargs",
     "langchain",
     "langgraph",
+    "minioadmin",
     "msgpackr",
     "ollama",
     "openai",
     "perpes",
     "qwen",
     "rrweb",
+    "Sarasa",
     "swifty"
   ]
 }

@@ -4,10 +4,10 @@
 
 @theme inline {
   --font-sans:
-    -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC",
-    "Microsoft YaHei", system-ui, sans-serif;
-  --font-mono: "Geist Mono", "Maple Mono", "SF Mono", Menlo, monospace;
-  --font-display: "Geist Mono", "Maple Mono", var(--font-sans);
+    "Geist Mono", "Maple Mono", "SF Mono", Menlo, "Cascadia Code",
+    "Sarasa Gothic SC", "PingFang SC", "Microsoft YaHei", monospace;
+  --font-mono: var(--font-sans);
+  --font-display: var(--font-sans);
 
   --color-border: var(--border);
   --color-input: var(--input);
@@ -97,20 +97,6 @@
   * {
     @apply border-border outline-ring/50;
   }
-
-  body {
-    @apply bg-background text-foreground font-sans antialiased;
-  }
-
-  h1,
-  h2,
-  h3 {
-    @apply font-display tracking-tight;
-  }
-
-  ::selection {
-    @apply bg-primary/20;
-  }
 }
 
 @keyframes word-marquee-left {
@@ -131,36 +117,4 @@
   to {
     transform: translateX(0);
   }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .backdrop-blur-xl,
-  .backdrop-blur-md,
-  .backdrop-blur-sm,
-  .backdrop-blur {
-    backdrop-filter: none !important;
-  }
-
-  .bg-background\/70,
-  .bg-background\/80,
-  .bg-background\/90,
-  .bg-secondary\/60 {
-    background-color: var(--background) !important;
-  }
-}
-
-.toaster {
-  --normal-bg: var(--popover);
-  --normal-text: var(--popover-foreground);
-  --normal-border: var(--border);
-  --border-radius: var(--radius);
 }

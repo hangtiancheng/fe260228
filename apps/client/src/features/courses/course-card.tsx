@@ -62,7 +62,7 @@ export function CourseCard({ course, serverBaseUrl }: CourseCardProps) {
         <CardFooter>
           <Button asChild className="w-full">
             <a href={learnUrl}>
-              <BookOpen aria-hidden="true" size={18} />
+              <BookOpen aria-hidden="true" />
               Start learning
             </a>
           </Button>

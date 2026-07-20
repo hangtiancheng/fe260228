@@ -18,7 +18,7 @@ export function PageShell({
     <section className="bg-muted flex min-h-112 items-center justify-center rounded-lg">
       <div className="flex max-w-2xl flex-col items-center gap-5 text-center">
         <Badge className="bg-primary/10 text-primary gap-2 px-3 py-1">
-          <Icon aria-hidden="true" size={16} />
+          <Icon aria-hidden="true" />
           {kicker}
         </Badge>
         <h1 className="font-display text-4xl font-bold tracking-tight md:text-6xl">

@@ -43,7 +43,7 @@ export function SettingsProfile() {
       <header className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <Badge className="mb-3 gap-2" variant="secondary">
-            <Settings aria-hidden="true" size={16} />
+            <Settings aria-hidden="true" />
             Account Settings
           </Badge>
           <h1 className="text-4xl font-bold">Tune your learning profile</h1>
