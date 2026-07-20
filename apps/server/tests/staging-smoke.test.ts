@@ -34,6 +34,7 @@ describe("staging smoke configuration", () => {
       "REDIS_HOST",
       "MINIO_ENDPOINT",
       "MINIO_BUCKET",
+      "OPENAI_BASE_URL",
       "OPENAI_API_KEY",
     ]);
   });
@@ -63,6 +64,7 @@ describe("staging smoke configuration", () => {
       "EMAIL_USER",
       "EMAIL_PASSWORD",
       "EMAIL_FROM",
+      "OPENAI_BASE_URL",
       "OPENAI_API_KEY",
     ]);
   });

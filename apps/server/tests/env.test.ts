@@ -86,7 +86,7 @@ describe("environment validation", () => {
 
   test("rejects unsupported AI providers", () => {
     const source: Record<string, string> = {
-      AI_PROVIDER: "openai",
+      AI_PROVIDER: "anthropic",
       JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
     };
 
