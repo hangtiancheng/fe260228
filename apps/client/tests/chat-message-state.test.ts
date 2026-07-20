@@ -1,5 +1,8 @@
 import { describe, expect, test } from "vitest";
-import { appendChatStreamChunk, createPendingAssistantMessage } from "../src/features/chat";
+import {
+  appendChatStreamChunk,
+  createPendingAssistantMessage,
+} from "../src/features/chat";
 import type { ChatMessageList } from "../src/shared/api/chat-schema";
 
 describe("chat message state", () => {

@@ -1,6 +1,9 @@
 import { describe, expect, test } from "vitest";
 import { TradeStatus } from "../src/generated/prisma/client.js";
-import { formatCourse, purchasedCourseWhere } from "../src/modules/course/service.js";
+import {
+  formatCourse,
+  purchasedCourseWhere,
+} from "../src/modules/course/service.js";
 
 describe("course service", () => {
   test("formats course price for API responses", () => {

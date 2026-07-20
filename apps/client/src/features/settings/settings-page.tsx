@@ -7,8 +7,7 @@ import { AccountCard } from "./account-card";
 import { AvatarCard } from "./avatar-card";
 import { ProfileForm } from "./profile-form";
 import { TaskCard } from "./task-card";
-import { useSettingsProfile } from "../../../tests/use-settings-profile";
-
+import { useSettingsProfile } from "./use-settings-profile";
 export function SettingsProfile() {
   const { config } = useAppServices();
   const state = useSettingsProfile();

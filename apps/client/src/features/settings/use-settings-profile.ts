@@ -1,13 +1,13 @@
+import { useAppServices } from "@/app/use-app-services";
 import { useEffect, useState, type ChangeEvent } from "react";
-import { useAppServices } from "../src/app/use-app-services";
-import { useAuthSession } from "../src/features/auth";
+import { useAuthSession } from "../auth";
+import { getAvatarFileError } from "./avatar-file";
 import {
+  type SettingsForm,
+  SettingsFormSchema,
   createSettingsForm,
   createUserUpdate,
-  SettingsFormSchema,
-  type SettingsForm,
-} from "../src/features/settings/settings-form";
-import { getAvatarFileError } from "../src/features/settings/avatar-file";
+} from "./settings-form";
 
 export function useSettingsProfile() {
   const { api, session } = useAppServices();

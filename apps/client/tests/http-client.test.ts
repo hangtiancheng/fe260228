@@ -1,7 +1,10 @@
 import { describe, expect, test, vi } from "vitest";
 import { z } from "zod";
 import { createApiClient } from "../src/shared/http/http-client";
-import { HttpRequestError, NetworkRequestError } from "../src/shared/http/http-error";
+import {
+  HttpRequestError,
+  NetworkRequestError,
+} from "../src/shared/http/http-error";
 
 const ResponseSchema = z.object({
   value: z.string(),

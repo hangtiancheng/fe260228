@@ -1,6 +1,9 @@
 import { describe, expect, test } from "vitest";
 import { createSocketLifecycle } from "../src/shared/realtime/socket-lifecycle";
-import type { RealtimeSocket, SocketFactory } from "../src/shared/realtime/socket-lifecycle";
+import type {
+  RealtimeSocket,
+  SocketFactory,
+} from "../src/shared/realtime/socket-lifecycle";
 
 describe("createSocketLifecycle", () => {
   test("connects once, disconnects, and removes listeners", () => {

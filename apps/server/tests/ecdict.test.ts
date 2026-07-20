@@ -1,5 +1,8 @@
 import { describe, expect, test } from "vitest";
-import { createWordBookImportRow, parseCsvLine } from "../src/shared/utils/ecdict-row.js";
+import {
+  createWordBookImportRow,
+  parseCsvLine,
+} from "../src/shared/utils/ecdict-row.js";
 import {
   requiredWordBookCsvHeaders,
   validateWordBookCsvHeaders,

@@ -1,5 +1,9 @@
 import { describe, expect, test } from "vitest";
-import { hashPassword, isPasswordHash, verifyPassword } from "../src/shared/auth/password.js";
+import {
+  hashPassword,
+  isPasswordHash,
+  verifyPassword,
+} from "../src/shared/auth/password.js";
 
 describe("password hashing", () => {
   test("hashes and verifies passwords", async () => {

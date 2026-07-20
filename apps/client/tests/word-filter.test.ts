@@ -1,5 +1,9 @@
 import { describe, expect, test } from "vitest";
-import { createWordQuery, toggleWordFilter, type WordFilterKey } from "../src/features/word-book";
+import {
+  createWordQuery,
+  toggleWordFilter,
+  type WordFilterKey,
+} from "../src/features/word-book";
 
 describe("word book filters", () => {
   test("only sends selected filters to the server", () => {

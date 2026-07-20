@@ -1,5 +1,8 @@
 import { describe, expect, test } from "vitest";
-import type { AlipayClient, AlipayPagePayInput } from "../src/modules/pay/alipay-adapter.js";
+import type {
+  AlipayClient,
+  AlipayPagePayInput,
+} from "../src/modules/pay/alipay-adapter.js";
 import {
   createAlipayNotifyUrl,
   createAlipayPaymentOrderResult,

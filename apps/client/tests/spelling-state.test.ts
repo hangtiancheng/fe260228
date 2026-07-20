@@ -1,5 +1,9 @@
 import { describe, expect, test } from "vitest";
-import { createSpellingCells, isSpellingComplete, updateSpellingCell } from "../src/features/learning";
+import {
+  createSpellingCells,
+  isSpellingComplete,
+  updateSpellingCell,
+} from "../src/features/learning";
 
 describe("spelling state", () => {
   test("tracks correct and incorrect letter input", () => {

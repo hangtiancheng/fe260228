@@ -27,5 +27,9 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["./eslint.config.ts", "./vite.config.ts", "./vite-plugin-sentry.ts"]
+  "include": [
+    "./eslint.config.ts",
+    "./vite.config.ts",
+    "./vite-plugin-sentry.ts"
+  ]
 }

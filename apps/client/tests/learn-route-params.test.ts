@@ -1,5 +1,8 @@
 import { describe, expect, test } from "vitest";
-import { parseLearnRouteParams, parseLearnRoutePath } from "../src/features/learning";
+import {
+  parseLearnRouteParams,
+  parseLearnRoutePath,
+} from "../src/features/learning";
 
 describe("parseLearnRoutePath", () => {
   test("parses and decodes the legacy learning route", () => {

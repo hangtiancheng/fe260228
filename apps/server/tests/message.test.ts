@@ -1,5 +1,8 @@
 import { describe, expect, test } from "vitest";
-import { parseAgentStreamChunk, toHistoryItem } from "../src/modules/ai/message.js";
+import {
+  parseAgentStreamChunk,
+  toHistoryItem,
+} from "../src/modules/ai/message.js";
 
 describe("AI message parsing", () => {
   test("narrows streamed agent chunks", () => {
