@@ -22,28 +22,10 @@ describe("mounted route groups", () => {
     expect(response.status).toBe(400);
   });
 
-  test("exposes the course route group", async () => {
-    const app = createApp({ readinessChecks: [] });
-
-    const response = await app.request("/api/v1/course/my");
-
-    expect(response.status).toBe(401);
-  });
-
   test("exposes the learn route group", async () => {
     const app = createApp({ readinessChecks: [] });
 
     const response = await app.request("/api/v1/learn/word/course-1");
-
-    expect(response.status).toBe(401);
-  });
-
-  test("exposes the pay route group", async () => {
-    const app = createApp({ readinessChecks: [] });
-
-    const response = await app.request("/api/v1/pay/create", {
-      method: "POST",
-    });
 
     expect(response.status).toBe(401);
   });

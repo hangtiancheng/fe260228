@@ -56,10 +56,11 @@ describe("AI readiness configuration", () => {
         BOCHA_API_KEY: "",
         BOCHA_ENABLED: false,
         BOCHA_SEARCH_URL: "",
+        OPENAI_BASE_URL: "https://api.openai.com/v1",
         OPENAI_API_KEY: "",
         OLLAMA_BASE_URL: "http://127.0.0.1:11434",
         OLLAMA_MODEL: "qwen3.5",
-        OLLAMA_REASONER_MODEL: "openai-r1",
+        OLLAMA_REASONER_MODEL: "deepseek-r1",
       })(),
     ).resolves.toEqual(
       createDependencyStatus("ai", false, "missing OPENAI_API_KEY"),
@@ -74,15 +75,16 @@ describe("AI readiness configuration", () => {
           BOCHA_API_KEY: "",
           BOCHA_ENABLED: false,
           BOCHA_SEARCH_URL: "",
+          OPENAI_BASE_URL: "https://api.openai.com/v1",
           OPENAI_API_KEY: "",
           OLLAMA_BASE_URL: "http://127.0.0.1:11434",
           OLLAMA_MODEL: "qwen3.5",
-          OLLAMA_REASONER_MODEL: "openai-r1",
+          OLLAMA_REASONER_MODEL: "deepseek-r1",
         },
         {
           fetchImpl: async () =>
             Response.json({
-              models: [{ name: "qwen3.5:latest" }, { name: "openai-r1" }],
+              models: [{ name: "qwen3.5:latest" }, { name: "deepseek-r1" }],
             }),
         },
       )(),
@@ -103,10 +105,11 @@ describe("AI readiness configuration", () => {
           BOCHA_API_KEY: "",
           BOCHA_ENABLED: false,
           BOCHA_SEARCH_URL: "",
+          OPENAI_BASE_URL: "https://api.openai.com/v1",
           OPENAI_API_KEY: "",
           OLLAMA_BASE_URL: "http://127.0.0.1:11434",
           OLLAMA_MODEL: "qwen3.5",
-          OLLAMA_REASONER_MODEL: "openai-r1",
+          OLLAMA_REASONER_MODEL: "deepseek-r1",
         },
         {
           fetchImpl: async () => Response.json({ models: [] }),
@@ -116,7 +119,7 @@ describe("AI readiness configuration", () => {
       createDependencyStatus(
         "ai",
         false,
-        "missing Ollama models: qwen3.5, openai-r1",
+        "missing Ollama models: qwen3.5, deepseek-r1",
       ),
     );
   });
@@ -128,10 +131,11 @@ describe("AI readiness configuration", () => {
         BOCHA_API_KEY: "",
         BOCHA_ENABLED: true,
         BOCHA_SEARCH_URL: "",
+        OPENAI_BASE_URL: "https://api.openai.com/v1",
         OPENAI_API_KEY: "",
         OLLAMA_BASE_URL: "http://127.0.0.1:11434",
         OLLAMA_MODEL: "qwen3.5",
-        OLLAMA_REASONER_MODEL: "openai-r1",
+        OLLAMA_REASONER_MODEL: "deepseek-r1",
       })(),
     ).resolves.toEqual(
       createDependencyStatus("ai", false, "invalid Bocha config"),

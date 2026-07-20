@@ -19,6 +19,7 @@ type AiRuntimeEnv = Pick<
   Env,
   | "AI_PROVIDER"
   | "OPENAI_API_KEY"
+  | "OPENAI_BASE_URL"
   | "OPENAI_API_MODEL"
   | "OPENAI_REASONER_API_MODEL"
   | "OLLAMA_BASE_URL"
@@ -104,6 +105,10 @@ export const createAiAgentForEnv = (
   const model = selectAgentModelId(config, {
     deepThink: options.deepThink === true,
   });
+
+  if (config.AI_PROVIDER === "openai") {
+    process.env.OPENAI_BASE_URL = config.OPENAI_BASE_URL;
+  }
 
   if (config.AI_PROVIDER === "ollama") {
     process.env.OLLAMA_BASE_URL = config.OLLAMA_BASE_URL;

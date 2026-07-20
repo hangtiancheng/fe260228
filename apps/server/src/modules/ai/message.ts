@@ -4,10 +4,9 @@ const messageChunkSchema = z.object({
   content: z.union([z.string(), z.array(z.unknown())]).optional(),
   type: z.string().optional(),
   additional_kwargs: z
-    .object({
+    .looseObject({
       reasoning_content: z.string().optional(),
     })
-    .passthrough()
     .optional(),
 });
 

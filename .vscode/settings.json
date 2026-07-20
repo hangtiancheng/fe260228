@@ -3,7 +3,7 @@
     "bocha",
     "bullmq",
     "checkpointer",
-    "openai",
+    "deepseek",
     "ecdict",
     "esbuild",
     "GSAP",
@@ -13,6 +13,8 @@
     "langgraph",
     "msgpackr",
     "ollama",
+    "openai",
+    "qwen",
     "rrweb",
     "swifty"
   ]

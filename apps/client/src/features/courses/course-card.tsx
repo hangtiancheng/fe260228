@@ -7,10 +7,7 @@ export type CourseCardProps = {
   readonly serverBaseUrl: string;
 };
 
-export function CourseCard({
-  course,
-  serverBaseUrl,
-}: CourseCardProps) {
+export function CourseCard({ course, serverBaseUrl }: CourseCardProps) {
   const imageUrl = createCourseImageUrl(serverBaseUrl, course.url);
   const learnUrl = `/courses/learn/${encodeURIComponent(course.id)}/${encodeURIComponent(course.name)}`;
 

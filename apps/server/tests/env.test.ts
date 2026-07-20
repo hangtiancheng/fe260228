@@ -60,6 +60,7 @@ describe("environment validation", () => {
     const openaiEnv = parseEnv({
       AI_PROVIDER: "openai",
       JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
+      // OPENAI_BASE_URL: "https://api.openai.com/v1",
     });
     const ollamaEnv = parseEnv({
       AI_PROVIDER: "ollama",
@@ -80,7 +81,7 @@ describe("environment validation", () => {
     });
 
     expect(env.OLLAMA_MODEL).toBe("qwen3.5");
-    expect(env.OLLAMA_REASONER_MODEL).toBe("openai-r1");
+    expect(env.OLLAMA_REASONER_MODEL).toBe("deepseek-r1");
   });
 
   test("rejects unsupported AI providers", () => {

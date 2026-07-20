@@ -12,6 +12,7 @@ type AiReadinessEnv = Pick<
   | "BOCHA_ENABLED"
   | "BOCHA_SEARCH_URL"
   | "OPENAI_API_KEY"
+  | "OPENAI_BASE_URL"
   | "OLLAMA_BASE_URL"
   | "OLLAMA_MODEL"
   | "OLLAMA_REASONER_MODEL"

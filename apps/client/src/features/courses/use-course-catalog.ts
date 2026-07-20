@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppServices } from "../../app/use-app-services";
-import type { Course, CourseList } from "../../shared/api/course-schema";
+import type { CourseList } from "../../shared/api/course-schema";
 
 export function useCourseCatalog() {
   const { api } = useAppServices();

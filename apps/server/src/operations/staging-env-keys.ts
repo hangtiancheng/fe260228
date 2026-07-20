@@ -22,7 +22,7 @@ const emailRequiredStagingEnvKeys = [
 ] as const;
 
 const providerRequiredStagingEnvKeys = {
-  openai: ["OPENAI_API_KEY"] as const,
+  openai: ["OPENAI_BASE_URL", "OPENAI_API_KEY"] as const,
   ollama: ["OLLAMA_BASE_URL", "OLLAMA_MODEL"] as const,
 };
 
