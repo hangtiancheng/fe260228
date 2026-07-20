@@ -12,7 +12,7 @@ import {
   createPaymentServices,
   paymentSuccessResponse,
   paymentTestCourse,
-} from "../src/features/courses/payment-dialog-test-helpers";
+} from "./payment-dialog-test-helpers";
 import { PaymentDialog } from "../src/features/courses/payment-dialog";
 
 describe("PaymentDialog", () => {

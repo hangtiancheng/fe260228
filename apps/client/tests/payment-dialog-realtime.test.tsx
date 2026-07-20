@@ -14,7 +14,7 @@ import {
   createPaymentServices,
   paymentSuccessResponse,
   paymentTestCourse,
-} from "../src/features/courses/payment-dialog-test-helpers";
+} from "./payment-dialog-test-helpers";
 
 describe("PaymentDialog realtime confirmation", () => {
   afterEach(() => {

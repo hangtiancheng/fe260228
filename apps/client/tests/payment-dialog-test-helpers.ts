@@ -1,10 +1,10 @@
-import { createAppServices } from "../../app/app-services";
-import type { AppServices } from "../../app/app-services";
-import type { AppConfig } from "../../shared/config";
+import { createAppServices } from "../src/app/app-services";
+import type { AppServices } from "../src/app/app-services";
+import type { AppConfig } from "../src/shared/config";
 import {
   createSocketLifecycle,
   type RealtimeSocket,
-} from "../../shared/realtime";
+} from "../src/shared/realtime";
 
 export const paymentTestConfig: AppConfig = {
   dataProvider: "swr",

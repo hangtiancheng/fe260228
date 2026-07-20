@@ -1,7 +1,7 @@
 import { useMemo, type ReactNode } from "react";
-import { createAppServices } from "./app-services";
-import { AppServicesProvider } from "./app-services-context";
-import type { AppConfig } from "../shared/config";
+import { createAppServices } from "../../src/app/app-services";
+import { AppServicesProvider } from "../../src/app/app-services-context";
+import type { AppConfig } from "../../src/shared/config";
 
 const storybookConfig: AppConfig = {
   dataProvider: "swr",

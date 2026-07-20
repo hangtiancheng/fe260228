@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { StorybookServices } from "../../src/app/storybook-services";
+import { StorybookServices } from "./storybook-services";
 import { LoginForm } from "../../src/features/auth-ui/login-form";
 
 const meta = {

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { HomeFeatureGrid } from "./home-feature-grid";
-import { HomeStatGrid } from "./home-stat-grid";
+import { HomeFeatureGrid } from "../../src/app/pages/home-feature-grid";
+import { HomeStatGrid } from "../../src/app/pages/home-stat-grid";
 
 const meta = {
   title: "Features/Home",

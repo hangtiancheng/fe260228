@@ -1,7 +1,7 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, test } from "vitest";
-import type { AppConfig } from "../../shared/config";
-import { createAppRoot } from "../app-root";
+import type { AppConfig } from "../src/shared/config";
+import { createAppRoot } from "../src/app/app-root";
 
 const config: AppConfig = {
   dataProvider: "swr",

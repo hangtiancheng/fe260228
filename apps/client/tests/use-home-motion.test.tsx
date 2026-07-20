@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, test, vi } from "vitest";
-import { useHomeMotion } from "./use-home-motion";
+import { useHomeMotion } from "../src/app/pages/use-home-motion";
 
 const gsapCalls = vi.hoisted(() => ({
   fromTo: vi.fn(),

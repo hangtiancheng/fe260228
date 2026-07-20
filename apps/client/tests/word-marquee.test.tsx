@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
-import { StorybookServices } from "../src/app/storybook-services";
+import { StorybookServices } from "../.storybook/components/storybook-services";
 import { WordMarquee } from "../src/features/word-marquee/word-marquee";
 
 describe("WordMarquee", () => {
