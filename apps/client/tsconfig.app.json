@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "types": ["vite/client"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [".storybook", "src", "vite-plugin-sentry.ts", "tests/app.test.tsx", "tests/app-router.test.tsx", "tests/app-root.test.tsx", ".storybook/components/shared-states.stories.tsx", "tests/browser-socket.test.ts", "tests/safe-markdown.test.ts", "tests/socket-lifecycle.test.ts", "tests/http-client.test.ts", "tests/provider-env.test.ts", "tests/speech-recognition.test.tsx", "tests/response-schema.test.ts", "tests/word-schema.test.ts", "tests/pay-schema.test.ts", "tests/use-auth-session.test.tsx", "tests/auth-session.test.ts", ".storybook/components/auth-ui.stories.tsx", "tests/chat-message-state.test.ts", ".storybook/components/courses.stories.tsx", ".storybook/components/chat.stories.tsx", "tests/course-catalog.test.tsx", "tests/course-image.test.ts", "tests/payment-dialog.test.tsx", "tests/payment-dialog-realtime.test.tsx", "tests/spelling-state.test.ts", "tests/use-learning-session.test.tsx", "tests/learn-route-params.test.ts", "tests/spelling-grid.test.tsx", "tests/settings-page.test.tsx", "tests/settings-form.test.ts", "tests/avatar-file.test.ts", ".storybook/components/settings.stories.tsx", ".storybook/components/learning.stories.tsx", "tests/word-filter.test.ts", "tests/word-book-page.test.tsx", ".storybook/components/word-book.stories.tsx", "tests/word-marquee.test.tsx"]
+}

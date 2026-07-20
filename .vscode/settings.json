@@ -3,11 +3,14 @@
     "bocha",
     "deepseek",
     "ecdict",
+    "esbuild",
     "GSAP",
     "hangtiancheng",
     "kwargs",
     "langchain",
+    "msgpackr",
     "ollama",
-    "rrweb"
+    "rrweb",
+    "swifty"
   ]
 }

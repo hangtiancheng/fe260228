@@ -1,0 +1,23 @@
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { StorybookServices } from "../../src/app/storybook-services";
+import { LoginForm } from "../../src/features/auth-ui/login-form";
+
+const meta = {
+  title: "Features/Auth",
+} satisfies Meta;
+
+export default meta;
+
+type Story = StoryObj;
+
+export const Login: Story = {
+  render: () => (
+    <div className="card bg-base-100 max-w-md shadow-xl">
+      <div className="card-body">
+        <StorybookServices>
+          <LoginForm close={() => undefined} setMode={() => undefined} />
+        </StorybookServices>
+      </div>
+    </div>
+  ),
+};

@@ -12,6 +12,6 @@
     "rootDir": "./",
     "outDir": "./dist"
   },
-  "include": ["src/**/*", "eslint.config.mjs", "prisma.config.ts"],
+  "include": ["src/**/*", "eslint.config.mjs", "prisma.config.ts", "tests/route-smoke.test.ts", "tests/app-auth-boundaries.test.ts", "tests/app.test.ts", "tests/password.test.ts", "tests/env.test.ts", "tests/sender.test.ts", "tests/request-id.test.ts", "tests/auth.test.ts", "tests/ecdict.test.ts", "tests/staging-smoke.test.ts", "tests/ollama-readiness.test.ts", "tests/payment-readiness.test.ts", "tests/readiness.test.ts", "tests/bocha-search.test.ts", "tests/digest-service.test.ts", "tests/message.test.ts", "tests/prompts.test.ts", "tests/readme-prompt-contract.test.ts", "tests/runtime.test.ts", "tests/tracker-service.test.ts", "tests/alipay-adapter.test.ts", "tests/boundary.test.ts", "tests/pay.test.ts", "tests/notify.test.ts", "tests/order.test.ts", "tests/readme-payment-contract.test.ts", "tests/pay-service.test.ts", "tests/learn-service.test.ts", "tests/word-selection.test.ts", "tests/course-service.test.ts"],
   "exclude": ["node_modules", "dist", "src/**/*.test.ts"]
 }
