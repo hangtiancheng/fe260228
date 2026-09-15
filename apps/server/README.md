@@ -20,7 +20,7 @@ The **backend** of [`fe260228`](../..) — an AI-powered English learning platfo
 - **SSE streaming** with a dedicated **deep-thinking** channel that emits
   reasoning tokens separately from the assistant response.
 - **Pluggable model providers** — any OpenAI-compatible endpoint or a local
-  Ollama instance, selected per persona.
+  openai instance, selected per persona.
 - **LangGraph Postgres checkpointing** — conversation history persisted
   per `userId-role` thread.
 - **Parallel ECDICT import** — a worker pool capable of ingesting millions of

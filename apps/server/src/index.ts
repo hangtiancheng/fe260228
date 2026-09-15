@@ -9,7 +9,7 @@ import { initMinio } from "./shared/utils/minio.js";
 const app = createApp();
 
 initMinio().catch((err) => {
-  console.error("Failed to initialize Minio:", err);
+	console.error("Failed to initialize Minio:", err);
 });
 
 initCronJobs();
@@ -17,24 +17,24 @@ initCronJobs();
 const port = env.PORT;
 
 serve(
-  {
-    fetch: app.fetch,
-    port,
-  },
-  (info) => {
-    console.log(`Server is running on http://localhost:${info.port}`);
-  },
+	{
+		fetch: app.fetch,
+		port,
+	},
+	(info) => {
+		console.log(`Server is running on http://localhost:${info.port}`);
+	},
 );
 
 const shutdown = async () => {
-  await disconnectPrisma();
-  process.exit(0);
+	await disconnectPrisma();
+	process.exit(0);
 };
 
 process.once("SIGINT", () => {
-  void shutdown();
+	void shutdown();
 });
 
 process.once("SIGTERM", () => {
-  void shutdown();
+	void shutdown();
 });

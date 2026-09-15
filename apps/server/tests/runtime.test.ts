@@ -1,73 +1,39 @@
 import { ChatOpenAI } from "@langchain/openai";
-import { ChatOllama } from "@langchain/ollama";
 import { describe, expect, test } from "vitest";
 import { parseEnv } from "../src/shared/config/env.js";
 import {
-  createChatModelForEnv,
-  createOllamaInstance,
-  selectAgentModelId,
-  selectOllamaModel,
+	createChatModelForEnv,
+	selectAgentModelId,
 } from "../src/modules/ai/runtime.js";
 
-const createRuntimeEnv = (provider: "openai" | "ollama") =>
-  parseEnv({
-    AI_PROVIDER: provider,
-    JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
-    OPENAI_BASE_URL: "https://api.openai.com/v1",
-    OPENAI_API_KEY: "openai-key",
-    OPENAI_MODEL: "openai-chat",
-    OPENAI_REASONING_MODEL: "openai-reasoner",
-    OLLAMA_BASE_URL: "http://127.0.0.1:11434",
-    OLLAMA_MODEL: "qwen3.5",
-    OLLAMA_REASONING_MODEL: "deepseek-r1",
-  });
+const createRuntimeEnv = (provider: "openai") =>
+	parseEnv({
+		AI_PROVIDER: provider,
+		JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
+		OPENAI_BASE_URL: "https://api.openai.com/v1",
+		OPENAI_API_KEY: "openai-key",
+		OPENAI_MODEL: "openai-chat",
+		OPENAI_REASONING_MODEL: "deepseek-v4-flash",
+	});
 
 describe("AI runtime provider selection", () => {
-  test("creates OpenAI chat and reasoner models", () => {
-    const env = createRuntimeEnv("openai");
-    const chatModel = createChatModelForEnv(env);
-    const reasonerModel = createChatModelForEnv(env, { deepThink: true });
+	test("creates OpenAI chat and reasoner models", () => {
+		const env = createRuntimeEnv("openai");
+		const chatModel = createChatModelForEnv(env);
+		const reasonerModel = createChatModelForEnv(env, { deepThink: true });
 
-    expect(chatModel).toBeInstanceOf(ChatOpenAI);
-    expect(reasonerModel).toBeInstanceOf(ChatOpenAI);
-    expect(chatModel.model).toBe("openai-chat");
-    expect(reasonerModel.model).toBe("openai-reasoner");
-  });
+		expect(chatModel).toBeInstanceOf(ChatOpenAI);
+		expect(reasonerModel).toBeInstanceOf(ChatOpenAI);
+		expect(chatModel.model).toBe("openai-chat");
+		expect(reasonerModel.model).toBe("deepseek-v4-flash");
+	});
 
-  test("creates Ollama chat model from local provider config", () => {
-    const env = createRuntimeEnv("ollama");
-    const model = createChatModelForEnv(env);
-    const ollamaModel = createOllamaInstance(env);
+	test("selects LangChain agent model identifiers", () => {
+		const openaiEnv = createRuntimeEnv("openai");
 
-    expect(model).toBeInstanceOf(ChatOllama);
-    expect(model.model).toBe("qwen3.5");
-    expect(ollamaModel.baseUrl).toBe("http://127.0.0.1:11434");
-  });
-
-  test("uses Ollama reasoner model only when configured", () => {
-    const env = createRuntimeEnv("ollama");
-    const fallbackEnv = parseEnv({
-      AI_PROVIDER: "ollama",
-      JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
-      OLLAMA_MODEL: "qwen3.5",
-      OLLAMA_REASONING_MODEL: "",
-    });
-
-    expect(selectOllamaModel(env, true)).toBe("deepseek-r1");
-    expect(selectOllamaModel(fallbackEnv, true)).toBe("qwen3.5");
-  });
-
-  test("selects LangChain agent model identifiers", () => {
-    const openaiEnv = createRuntimeEnv("openai");
-    const ollamaEnv = createRuntimeEnv("ollama");
-
-    expect(selectAgentModelId(openaiEnv)).toBe("openai:openai-chat");
-    expect(selectAgentModelId(openaiEnv, { deepThink: true })).toBe(
-      "openai:openai-reasoner",
-    );
-    expect(selectAgentModelId(ollamaEnv)).toBe("ollama:qwen3.5");
-    expect(selectAgentModelId(ollamaEnv, { deepThink: true })).toBe(
-      "ollama:deepseek-r1",
-    );
-  });
+		expect(selectAgentModelId(openaiEnv)).toBe("openai:openai-chat");
+		expect(selectAgentModelId(openaiEnv, { deepThink: true })).toBe(
+			"openai:deepseek-v4-flash",
+		);
+	});
 });

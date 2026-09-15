@@ -17,7 +17,7 @@
 - Five conversation personas: AI Assistant, English Master, Business English, Creative Mode, and Programmer Mode
 - LangChain agent backed by a LangGraph Postgres checkpoint saver, persisting conversation history per `userId-role` thread
 - Optional Bocha web-search integration, with source attribution in answers
-- Pluggable model providers: any OpenAI-compatible endpoint, or a local Ollama instance
+- Pluggable model providers: any OpenAI-compatible endpoint, or a local openai instance
 
 ### Vocabulary Library and Word Training
 
@@ -59,7 +59,7 @@
 | **Frontend quality**       | Vitest · Testing Library · MSW · Storybook · ESLint · Prettier                                                        |
 | **Backend framework**      | Hono · @hono/node-server · pino logging · request-id middleware                                                       |
 | **Data layer**             | Prisma 7 · PostgreSQL · Redis · BullMQ · MinIO                                                                        |
-| **AI**                     | LangChain · LangGraph Postgres checkpoint · OpenAI / Ollama                                                           |
+| **AI**                     | LangChain · LangGraph Postgres checkpoint · OpenAI / openai                                                           |
 | **Backend quality**        | Vitest · Biome · Zod validation · staging smoke tests                                                                 |
 
 ## Project Structure
@@ -95,7 +95,7 @@ fe260228/
 - **PostgreSQL** — primary datastore, also backing LangGraph conversation checkpoints
 - **Redis** — BullMQ job queue
 - **MinIO** — object storage for avatars and course assets
-- Optional: **Ollama** for local models or an OpenAI-compatible API key; an SMTP account for daily digests
+- Optional: **openai** for local models or an OpenAI-compatible API key; an SMTP account for daily digests
 
 ### Installation and Configuration
 

@@ -2,94 +2,76 @@ import { describe, expect, test } from "vitest";
 import { parseEnv } from "../src/shared/config/env.js";
 
 describe("environment validation", () => {
-  test("rejects invalid startup configuration", () => {
-    expect(() =>
-      parseEnv({
-        JWT_SECRET: "short",
-      }),
-    ).toThrow();
-  });
+	test("rejects invalid startup configuration", () => {
+		expect(() =>
+			parseEnv({
+				JWT_SECRET: "short",
+			}),
+		).toThrow();
+	});
 
-  test("parses numeric and boolean startup values", () => {
-    const env = parseEnv({
-      BOCHA_ENABLED: "true",
-      JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
-      MINIO_USE_SSL: "1",
-      PORT: "4000",
-      REDIS_PORT: "6380",
-    });
+	test("parses numeric and boolean startup values", () => {
+		const env = parseEnv({
+			BOCHA_ENABLED: "true",
+			JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
+			MINIO_USE_SSL: "1",
+			PORT: "4000",
+			REDIS_PORT: "6380",
+		});
 
-    expect(env.PORT).toBe(4000);
-    expect(env.MINIO_USE_SSL).toBe(true);
-    expect(env.BOCHA_ENABLED).toBe(true);
-    expect(env.REDIS_PORT).toBe(6380);
-  });
+		expect(env.PORT).toBe(4000);
+		expect(env.MINIO_USE_SSL).toBe(true);
+		expect(env.BOCHA_ENABLED).toBe(true);
+		expect(env.REDIS_PORT).toBe(6380);
+	});
 
-  test("defaults email integration to disabled", () => {
-    const env = parseEnv({
-      JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
-    });
+	test("defaults email integration to disabled", () => {
+		const env = parseEnv({
+			JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
+		});
 
-    expect(env.EMAIL_ENABLED).toBe(false);
-  });
+		expect(env.EMAIL_ENABLED).toBe(false);
+	});
 
-  test("rejects enabled email integration without credentials", () => {
-    expect(() =>
-      parseEnv({
-        EMAIL_ENABLED: "true",
-        JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
-      }),
-    ).toThrow();
-  });
+	test("rejects enabled email integration without credentials", () => {
+		expect(() =>
+			parseEnv({
+				EMAIL_ENABLED: "true",
+				JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
+			}),
+		).toThrow();
+	});
 
-  test("parses enabled email integration credentials", () => {
-    const env = parseEnv({
-      EMAIL_ENABLED: "true",
-      EMAIL_FROM: "noreply@example.com",
-      EMAIL_HOST: "smtp.example.com",
-      EMAIL_PASSWORD: "smtp-password",
-      EMAIL_USER: "smtp-user",
-      JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
-    });
+	test("parses enabled email integration credentials", () => {
+		const env = parseEnv({
+			EMAIL_ENABLED: "true",
+			EMAIL_FROM: "noreply@example.com",
+			EMAIL_HOST: "smtp.example.com",
+			EMAIL_PASSWORD: "smtp-password",
+			EMAIL_USER: "smtp-user",
+			JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
+		});
 
-    expect(env.EMAIL_ENABLED).toBe(true);
-    expect(env.EMAIL_HOST).toBe("smtp.example.com");
-  });
+		expect(env.EMAIL_ENABLED).toBe(true);
+		expect(env.EMAIL_HOST).toBe("smtp.example.com");
+	});
 
-  test("parses supported AI providers", () => {
-    const openaiEnv = parseEnv({
-      AI_PROVIDER: "openai",
-      JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
-      // OPENAI_BASE_URL: "https://api.openai.com/v1",
-    });
-    const ollamaEnv = parseEnv({
-      AI_PROVIDER: "ollama",
-      JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
-      OLLAMA_BASE_URL: "http://127.0.0.1:11434",
-      OLLAMA_MODEL: "qwen3.5",
-    });
+	test("parses supported AI providers", () => {
+		const openaiEnv = parseEnv({
+			AI_PROVIDER: "openai",
+			JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
+			// OPENAI_BASE_URL: "https://api.openai.com/v1",
+		});
 
-    expect(openaiEnv.AI_PROVIDER).toBe("openai");
-    expect(ollamaEnv.AI_PROVIDER).toBe("ollama");
-    expect(ollamaEnv.OLLAMA_MODEL).toBe("qwen3.5");
-  });
+		expect(openaiEnv.AI_PROVIDER).toBe("openai");
+	});
 
-  test("defaults Ollama models to Qwen chat and OpenAI reasoning", () => {
-    const env = parseEnv({
-      AI_PROVIDER: "ollama",
-      JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
-    });
+	test("rejects unsupported AI providers", () => {
+		const source: Record<string, string> = {
+			AI_PROVIDER: "anthropic",
+			JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
+		};
 
-    expect(env.OLLAMA_MODEL).toBe("qwen3.5");
-    expect(env.OLLAMA_REASONING_MODEL).toBe("deepseek-r1");
-  });
-
-  test("rejects unsupported AI providers", () => {
-    const source: Record<string, string> = {
-      AI_PROVIDER: "anthropic",
-      JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
-    };
-
-    expect(() => parseEnv(source)).toThrow();
-  });
+		expect(() => parseEnv(source)).toThrow();
+	});
 });

@@ -1,136 +1,108 @@
 import { ChatOpenAI } from "@langchain/openai";
 import { PostgresSaver } from "@langchain/langgraph-checkpoint-postgres";
-import { ChatOllama } from "@langchain/ollama";
 import type { CreateAgentParams } from "langchain";
 import { createAgent } from "langchain";
 import { type Env, env } from "../../shared/config/env.js";
 
 export interface ChatModelOptions {
-  readonly deepThink?: boolean;
+	readonly deepThink?: boolean;
 }
 
 export interface AiAgentOptions extends ChatModelOptions {
-  readonly systemPrompt: string;
-  readonly checkpointer?: PostgresSaver;
-  readonly tools?: AiAgentTools;
+	readonly systemPrompt: string;
+	readonly checkpointer?: PostgresSaver;
+	readonly tools?: AiAgentTools;
 }
 
 type AiRuntimeEnv = Pick<
-  Env,
-  | "AI_PROVIDER"
-  | "OPENAI_API_KEY"
-  | "OPENAI_BASE_URL"
-  | "OPENAI_MODEL"
-  | "OPENAI_REASONING_MODEL"
-  | "OLLAMA_BASE_URL"
-  | "OLLAMA_MODEL"
-  | "OLLAMA_REASONING_MODEL"
+	Env,
+	| "AI_PROVIDER"
+	| "OPENAI_API_KEY"
+	| "OPENAI_BASE_URL"
+	| "OPENAI_MODEL"
+	| "OPENAI_REASONING_MODEL"
 >;
 
 type AiAgentTools = NonNullable<CreateAgentParams["tools"]>;
 
 export const createOpenAIInstance = (config: AiRuntimeEnv = env) =>
-  new ChatOpenAI({
-    apiKey: config.OPENAI_API_KEY,
-    model: config.OPENAI_MODEL,
-    temperature: 1.3,
-    maxTokens: 4396,
-    streaming: true,
-  });
+	new ChatOpenAI({
+		apiKey: config.OPENAI_API_KEY,
+		model: config.OPENAI_MODEL,
+		temperature: 1.3,
+		maxTokens: 4396,
+		streaming: true,
+	});
 
 export const createOpenAIReasoner = (config: AiRuntimeEnv = env) =>
-  new ChatOpenAI({
-    apiKey: config.OPENAI_API_KEY,
-    model: config.OPENAI_REASONING_MODEL,
-    temperature: 1.3,
-    maxTokens: 18000,
-    streaming: true,
-  });
-
-export const selectOllamaModel = (config: AiRuntimeEnv, deepThink = false) =>
-  deepThink && config.OLLAMA_REASONING_MODEL.length > 0
-    ? config.OLLAMA_REASONING_MODEL
-    : config.OLLAMA_MODEL;
-
-export const createOllamaInstance = (
-  config: AiRuntimeEnv = env,
-  deepThink = false,
-) =>
-  new ChatOllama({
-    baseUrl: config.OLLAMA_BASE_URL,
-    model: selectOllamaModel(config, deepThink),
-    temperature: 1.3,
-  });
+	new ChatOpenAI({
+		apiKey: config.OPENAI_API_KEY,
+		model: config.OPENAI_REASONING_MODEL,
+		temperature: 1.3,
+		maxTokens: 18000,
+		streaming: true,
+	});
 
 export const createChatModelForEnv = (
-  config: AiRuntimeEnv,
-  options: ChatModelOptions = {},
+	config: AiRuntimeEnv,
+	options: ChatModelOptions = {},
 ) => {
-  const deepThink = options.deepThink === true;
+	const deepThink = options.deepThink === true;
 
-  if (config.AI_PROVIDER === "ollama") {
-    return createOllamaInstance(config, deepThink);
-  }
+	// if (config.AI_PROVIDER === "openai")
 
-  return deepThink
-    ? createOpenAIReasoner(config)
-    : createOpenAIInstance(config);
+	return deepThink
+		? createOpenAIReasoner(config)
+		: createOpenAIInstance(config);
 };
 
 export const createChatModel = (options: ChatModelOptions = {}) =>
-  createChatModelForEnv(env, options);
+	createChatModelForEnv(env, options);
 
 export const selectAgentModelId = (
-  config: AiRuntimeEnv,
-  options: ChatModelOptions = {},
+	config: AiRuntimeEnv,
+	options: ChatModelOptions = {},
 ) => {
-  const deepThink = options.deepThink === true;
+	const deepThink = options.deepThink === true;
 
-  if (config.AI_PROVIDER === "ollama") {
-    return `ollama:${selectOllamaModel(config, deepThink)}`;
-  }
+	// if (config.AI_PROVIDER === "openai")
 
-  return `openai:${
-    deepThink ? config.OPENAI_REASONING_MODEL : config.OPENAI_MODEL
-  }`;
+	return `openai:${
+		deepThink ? config.OPENAI_REASONING_MODEL : config.OPENAI_MODEL
+	}`;
 };
 
 export const selectAgentModel = (options: ChatModelOptions = {}) =>
-  selectAgentModelId(env, options);
+	selectAgentModelId(env, options);
 
 export const createAiAgentForEnv = (
-  config: AiRuntimeEnv,
-  options: AiAgentOptions,
+	config: AiRuntimeEnv,
+	options: AiAgentOptions,
 ) => {
-  const model = selectAgentModelId(config, {
-    deepThink: options.deepThink === true,
-  });
+	const model = selectAgentModelId(config, {
+		deepThink: options.deepThink === true,
+	});
 
-  if (config.AI_PROVIDER === "openai") {
-    process.env.OPENAI_BASE_URL = config.OPENAI_BASE_URL;
-  }
+	// if (config.AI_PROVIDER === "openai")
+	process.env.OPENAI_BASE_URL = config.OPENAI_BASE_URL;
 
-  if (config.AI_PROVIDER === "ollama") {
-    process.env.OLLAMA_BASE_URL = config.OLLAMA_BASE_URL;
-  }
-
-  return createAgent({
-    ...(options.checkpointer ? { checkpointer: options.checkpointer } : {}),
-    ...(options.tools ? { tools: options.tools } : {}),
-    model,
-    systemPrompt: options.systemPrompt,
-  });
+	return createAgent({
+		...(options.checkpointer ? { checkpointer: options.checkpointer } : {}),
+		...(options.tools ? { tools: options.tools } : {}),
+		model,
+		systemPrompt: options.systemPrompt,
+	});
 };
 
 export const createAiAgent = (options: AiAgentOptions) =>
-  createAiAgentForEnv(env, options);
+	createAiAgentForEnv(env, options);
 
 let checkpointer: PostgresSaver | null = null;
 
 export const getCheckpoint = async () => {
-  if (!checkpointer) {
-    checkpointer = PostgresSaver.fromConnString(env.DATABASE_URL);
-    await checkpointer.setup();
-  }
-  return checkpointer;
+	if (!checkpointer) {
+		checkpointer = PostgresSaver.fromConnString(env.DATABASE_URL);
+		await checkpointer.setup();
+	}
+	return checkpointer;
 };
