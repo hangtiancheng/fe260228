@@ -1,0 +1,12 @@
+packages:
+  - apps/*
+
+allowBuilds:
+  "@prisma/engines": true
+  esbuild: true
+  msgpackr-extract: true
+  msw: true
+  prisma: true
+
+minimumReleaseAgeExclude:
+  - "@yukino.js/sentry@0.0.5"
