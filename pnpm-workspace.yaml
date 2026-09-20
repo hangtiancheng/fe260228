@@ -9,4 +9,4 @@ allowBuilds:
   prisma: true
 
 minimumReleaseAgeExclude:
-  - "@yukino.js/sentry@0.0.5"
+  - '@yukino.js/sentry@0.0.1 || 0.0.5'

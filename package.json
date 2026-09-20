@@ -1,12 +1,12 @@
 {
   "dependencies": {
-    "dayjs": "^1.11.20",
+    "dayjs": "^1.11.23",
     "md5": "^2.3.0"
   },
   "devDependencies": {
     "@types/md5": "^2.3.6",
-    "concurrently": "^9.2.1",
-    "prettier": "^3.8.3",
+    "concurrently": "^9.2.4",
+    "prettier": "^3.9.8",
     "prettier-plugin-tailwindcss": "^0.7.4"
   },
   "scripts": {
