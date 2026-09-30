@@ -1,0 +1,28 @@
+import { RotateCcw, TriangleAlert } from "lucide-react";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "../../shared/ui/components/alert";
+import { Button } from "../../shared/ui/components/button";
+
+export type ChatStreamErrorProps = {
+  readonly message: string;
+  readonly retry: () => void;
+};
+
+export function ChatStreamError({ message, retry }: ChatStreamErrorProps) {
+  return (
+    <Alert className="[&>svg]:translate-y-0" variant="destructive">
+      <TriangleAlert aria-hidden="true" className="row-span-2 self-center" />
+      <AlertTitle className="font-bold">Streaming interrupted</AlertTitle>
+      <AlertDescription className="flex items-center justify-between gap-3">
+        <p className="text-sm">{message}</p>
+        <Button onClick={retry} size="sm" type="button">
+          <RotateCcw aria-hidden="true" />
+          Retry
+        </Button>
+      </AlertDescription>
+    </Alert>
+  );
+}
