@@ -16,6 +16,7 @@
     "client:format": "pnpm --filter @fe26/client format",
     "server:format": "pnpm --filter @fe26/server format",
     "format": "concurrently \"pnpm client:format\" \"pnpm server:format\"",
+    "git:config": "git config user.name hangtiancheng && git config user.email '161043261@qq.com'",
     "git:commit": "git add -A && git commit -m \"feat: Introduce new features\"",
     "git:push": "pnpm git:commit && git push origin main"
   }
