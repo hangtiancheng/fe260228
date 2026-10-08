@@ -4,9 +4,11 @@
 
 @theme inline {
   --font-sans:
-    "Geist Mono", "Maple Mono", "SF Mono", Menlo, "Cascadia Code",
-    "Sarasa Gothic SC", "PingFang SC", "Microsoft YaHei", monospace;
-  --font-mono: var(--font-sans);
+    'Yukino', 'Maple Mono', Menlo, 'Cascadia Code', 'Sarasa Gothic SC', 'PingFang SC',
+    'Microsoft YaHei', sans-serif;
+  --font-mono:
+    'Yukino', 'Maple Mono', Menlo, 'Cascadia Code', 'Sarasa Gothic SC', 'PingFang SC',
+    'Microsoft YaHei', monospace;
   --font-display: var(--font-sans);
 
   --color-border: var(--border);
