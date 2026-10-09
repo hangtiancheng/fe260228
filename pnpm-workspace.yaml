@@ -8,5 +8,4 @@ allowBuilds:
   msw: true
   prisma: true
 
-minimumReleaseAgeExclude:
-  - '@yukino.js/sentry@0.0.1 || 0.0.5'
+minimumReleaseAge: 0
