@@ -6,7 +6,7 @@
   },
   "devDependencies": {
     "@types/md5": "^2.3.6",
-    "concurrently": "^9.2.4",
+    "concurrently": "^9.2.5",
     "prettier": "^3.9.9",
     "prettier-plugin-tailwindcss": "^0.7.4"
   },
