@@ -60,7 +60,6 @@ describe("environment validation", () => {
 		const openaiEnv = parseEnv({
 			AI_PROVIDER: "openai",
 			JWT_SECRET: "012345abcdefghijklmnopqrstuvwxyz",
-			// OPENAI_BASE_URL: "https://api.openai.com/v1",
 		});
 
 		expect(openaiEnv.AI_PROVIDER).toBe("openai");

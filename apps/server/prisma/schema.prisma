@@ -1,8 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
   provider = "prisma-client"
@@ -13,65 +9,62 @@ datasource db {
   provider = "postgresql"
 }
 
-// 用户表
 model User {
-  id              String           @id @default(cuid()) // 用户 ID
-  name            String // 用户名
-  email           String?          @unique // 邮箱
-  phone           String           @unique // 手机号
-  address         String? // 地址
-  password        String // 密码
-  avatar          String? // 头像
-  bio             String? // 签名
-  isTimingTask    Boolean          @default(false) // 是否开启定时任务
-  timingTaskTime  String?          @default("00:00:00") // 定时任务时间，默认晚上 0 点开始，每隔 24 小时执行一次
-  wordNumber      Int              @default(0) // 单词数量
-  dayNumber       Int              @default(0) // 打卡天数
-  createdAt       DateTime         @default(now()) // 创建时间
-  updatedAt       DateTime         @updatedAt // 更新时间
-  lastLoginAt     DateTime? // 最后登录时间
+  id              String           @id @default(cuid())
+  name            String
+  email           String?          @unique
+  phone           String           @unique
+  address         String?
+  password        String
+  avatar          String?
+  bio             String?
+  isTimingTask    Boolean          @default(false)
+  timingTaskTime  String?          @default("00:00:00")
+  wordNumber      Int              @default(0)
+  dayNumber       Int              @default(0)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  lastLoginAt     DateTime?
   wordBookRecords WordBookRecord[]
   visitors        Visitor[]
 }
 
-// 记录已学习的单词
 model WordBookRecord {
-  id        String   @id @default(cuid()) // 记录 ID
-  wordId    String // 单词 ID
-  isMaster  Boolean  @default(false) // 是否掌握
-  createdAt DateTime @default(now()) // 创建时间
-  updatedAt DateTime @updatedAt // 更新时间
-  userId    String // 用户 ID
+  id        String   @id @default(cuid())
+  wordId    String
+  isMaster  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   word      WordBook @relation(fields: [wordId], references: [id], onDelete: Cascade)
 
   @@unique([userId, wordId])
 }
 
-// 单词表
 model WordBook {
-  id              String           @id @default(cuid()) // 单词 ID
-  word            String // 单词
-  phonetic        String? // 音标
-  definition      String? // 定义
-  translation     String? // 翻译
-  pos             String? // 词性
-  collins         String? // 柯林斯
-  oxford          String? // 牛津
-  tag             String? // 标签
-  bnc             String? // BNC, 英国国家语料库
-  frq             String? // 频率
-  exchange        String? // 同义词
-  gk              Boolean? // 高考
-  zk              Boolean? // 中考
-  gre             Boolean? // GRE
-  toefl           Boolean? // TOEFL
-  ielts           Boolean? // IELTS
-  cet6            Boolean? // 大学英语六级
-  cet4            Boolean? // 大学英语四级
-  ky              Boolean? // 考研
-  createdAt       DateTime         @default(now()) // 创建时间
-  updatedAt       DateTime         @updatedAt // 更新时间
+  id              String           @id @default(cuid())
+  word            String
+  phonetic        String?
+  definition      String?
+  translation     String?
+  pos             String?
+  collins         String?
+  oxford          String?
+  tag             String?
+  bnc             String?
+  frq             String?
+  exchange        String?
+  gk              Boolean?
+  zk              Boolean?
+  gre             Boolean?
+  toefl           Boolean?
+  ielts           Boolean?
+  cet6            Boolean?
+  cet4            Boolean?
+  ky              Boolean?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
   wordBookRecords WordBookRecord[]
 
   @@index([word])
@@ -79,30 +72,28 @@ model WordBook {
   @@index([word, tag])
 }
 
-// 课程表
 model Course {
-  id            String         @id @default(cuid()) // 课程 ID
-  name          String // 课程名
-  value         String // 课程 value
-  description   String? // 课程描述
-  teacher       String // 教师
-  url           String // 课程 url
-  price         Decimal // 课程价格
-  createdAt     DateTime       @default(now()) // 创建时间
-  updatedAt     DateTime       @updatedAt // 更新时间
+  id            String         @id @default(cuid())
+  name          String
+  value         String
+  description   String?
+  teacher       String
+  url           String
+  price         Decimal
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
 }
 
-// UV 表
 model Visitor {
-  id                 String             @id @default(cuid()) // 游客 ID
-  anonymousId        String             @unique // 匿名 ID
-  userId             String? // 用户 ID
+  id                 String             @id @default(cuid())
+  anonymousId        String             @unique
+  userId             String?
   user               User?              @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt          DateTime           @default(now()) // 创建时间
-  updatedAt          DateTime           @updatedAt // 更新时间
-  browser            String? // 浏览器信息
-  os                 String? // 操作系统信息
-  device             String? // 设备信息
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  browser            String?
+  os                 String?
+  device             String?
   pageViews          PageView[]
   trackEvents        TrackEvent[]
   performanceEntries PerformanceEntry[]
@@ -112,48 +103,45 @@ model Visitor {
   @@index([anonymousId])
 }
 
-// PV 表
 model PageView {
-  id        String   @id @default(cuid()) // PV ID
-  visitorId String // 游客 ID
+  id        String   @id @default(cuid())
+  visitorId String
   visitor   Visitor  @relation(fields: [visitorId], references: [id], onDelete: Cascade)
-  url       String // 页面 url
-  referrer  String? // 来源 url
-  path      String // 页面路径
-  createdAt DateTime @default(now()) // 创建时间
-  updatedAt DateTime @updatedAt // 更新时间
+  url       String
+  referrer  String?
+  path      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([visitorId, createdAt])
   @@index([path, createdAt])
 }
 
-// 用户行为表
 model TrackEvent {
-  id        String   @id @default(cuid()) // 行为 ID
-  visitorId String // 游客 ID
+  id        String   @id @default(cuid())
+  visitorId String
   visitor   Visitor  @relation(fields: [visitorId], references: [id], onDelete: Cascade)
-  event     String // 事件类型
-  payload   Json? // 事件数据
-  url       String? // 页面 url
-  createdAt DateTime @default(now()) // 创建时间
-  updatedAt DateTime @updatedAt // 更新时间
+  event     String
+  payload   Json?
+  url       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([visitorId, createdAt])
   @@index([event, createdAt])
 }
 
-// 性能指标表
 model PerformanceEntry {
-  id        String   @id @default(cuid()) // 性能指标 ID
-  visitorId String // 游客 ID
+  id        String   @id @default(cuid())
+  visitorId String
   visitor   Visitor  @relation(fields: [visitorId], references: [id], onDelete: Cascade)
-  fp        Float? // FP
-  fcp       Float? // FCP
-  lcp       Float? // LCP
-  inp       Float? // INP
-  cls       Float? // CLS
-  createdAt DateTime @default(now()) // 创建时间
-  updatedAt DateTime @updatedAt // 更新时间
+  fp        Float?
+  fcp       Float?
+  lcp       Float?
+  inp       Float?
+  cls       Float?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([fp, createdAt])
   @@index([fcp, createdAt])
@@ -163,17 +151,16 @@ model PerformanceEntry {
   @@index([fp, fcp, lcp, inp, cls, createdAt])
 }
 
-// 错误指标表
 model ErrorEntry {
-  id        String   @id @default(cuid()) // 错误指标 ID
-  visitorId String // 游客 ID
+  id        String   @id @default(cuid())
+  visitorId String
   visitor   Visitor  @relation(fields: [visitorId], references: [id], onDelete: Cascade)
-  error     String // 错误类型 js, promise
-  message   String? // 错误信息
-  stack     String? // 错误堆栈
-  url       String? // 页面 url
-  createdAt DateTime @default(now()) // 创建时间
-  updatedAt DateTime @updatedAt // 更新时间
+  error     String
+  message   String?
+  stack     String?
+  url       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([visitorId, createdAt])
   @@index([error, createdAt])

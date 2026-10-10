@@ -19,7 +19,7 @@ export const generateToken = async (
 			iat: issuedAt,
 			jti: randomUUID(),
 			exp: issuedAt + 60 * 60 * 24,
-		}, // 1 day
+		},
 		env.JWT_SECRET,
 	);
 
@@ -30,7 +30,7 @@ export const generateToken = async (
 			iat: issuedAt,
 			jti: randomUUID(),
 			exp: issuedAt + 60 * 60 * 24 * 7,
-		}, // 7 days
+		},
 		env.JWT_SECRET,
 	);
 

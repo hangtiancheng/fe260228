@@ -5,8 +5,5 @@ import { App } from "../src";
 test("renders the application shell", () => {
   render(<App />);
 
-  expect(
-    // MUST `fe260228`
-    screen.getByRole("main", { name: "fe260228" }),
-  ).toBeInTheDocument();
+  expect(screen.getByRole("main", { name: "fe260228" })).toBeInTheDocument();
 });

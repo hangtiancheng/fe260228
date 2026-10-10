@@ -4,8 +4,6 @@ import {
   type WordMarqueeList,
 } from "../shared/api/word-marquee-schema";
 
-// cSpell: words bcdfghjklmnpqrstvwxyz aeiou
-
 const levels = ["core", "daily", "advanced"] as const;
 const consonants = "bcdfghjklmnpqrstvwxyz";
 const vowels = "aeiou";

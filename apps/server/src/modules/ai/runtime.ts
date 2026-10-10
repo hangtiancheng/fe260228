@@ -49,8 +49,6 @@ export const createChatModelForEnv = (
 ) => {
 	const deepThink = options.deepThink === true;
 
-	// if (config.AI_PROVIDER === "openai")
-
 	return deepThink
 		? createOpenAIReasoner(config)
 		: createOpenAIInstance(config);
@@ -64,8 +62,6 @@ export const selectAgentModelId = (
 	options: ChatModelOptions = {},
 ) => {
 	const deepThink = options.deepThink === true;
-
-	// if (config.AI_PROVIDER === "openai")
 
 	return `openai:${
 		deepThink ? config.OPENAI_REASONING_MODEL : config.OPENAI_MODEL
@@ -83,7 +79,6 @@ export const createAiAgentForEnv = (
 		deepThink: options.deepThink === true,
 	});
 
-	// if (config.AI_PROVIDER === "openai")
 	process.env.OPENAI_BASE_URL = config.OPENAI_BASE_URL;
 
 	return createAgent({

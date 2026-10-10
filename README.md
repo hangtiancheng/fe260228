@@ -162,14 +162,14 @@ pnpm dev
 
 ```bash
 # Frontend
-pnpm --filter @fe26/client test          # Vitest suites
-pnpm --filter @fe26/client typecheck     # Type checking
-pnpm --filter @fe26/client storybook     # Component gallery
+pnpm --filter client test          # Vitest suites
+pnpm --filter client typecheck     # Type checking
+pnpm --filter client storybook     # Component gallery
 
 # Backend
-pnpm --filter @fe26/server test          # Vitest suites
-pnpm --filter @fe26/server ci            # build + biome check + test + prisma validate
-pnpm --filter @fe26/server staging:smoke # Staging environment smoke tests
+pnpm --filter server test          # Vitest suites
+pnpm --filter server ci            # build + biome check + test + prisma validate
+pnpm --filter server staging:smoke # Staging environment smoke tests
 ```
 
 ## License

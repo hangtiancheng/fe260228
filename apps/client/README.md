@@ -1,4 +1,4 @@
-# @fe26/client
+# client
 
 The **frontend** of [`fe260228`](../..) — an AI-powered English learning platform. A
 React 19 + Vite + TanStack Router single-page app covering scenario-based AI
@@ -35,9 +35,9 @@ pnpm client:dev
 Or scoped directly:
 
 ```sh
-pnpm --filter @fe26/client dev
-pnpm --filter @fe26/client test         # vitest
-pnpm --filter @fe26/client storybook    # Storybook on :6006
+pnpm --filter client dev
+pnpm --filter client test         # vitest
+pnpm --filter client storybook    # Storybook on :6006
 ```
 
 ## Layout

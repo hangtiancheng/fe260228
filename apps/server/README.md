@@ -1,4 +1,4 @@
-# @fe26/server
+# server
 
 The **backend** of [`fe260228`](../..) — an AI-powered English learning platform. A
 [Hono](https://hono.dev) API server backed by PostgreSQL (Prisma 7), Redis
@@ -45,11 +45,11 @@ pnpm server:dev
 Scoped scripts:
 
 ```sh
-pnpm --filter @fe26/server db:migrate     # apply Prisma migrations
-pnpm --filter @fe26/server db:seed        # seed the database
-pnpm --filter @fe26/server word-book:import # import the ECDICT word books
-pnpm --filter @fe26/server test           # vitest
-pnpm --filter @fe26/server ci             # build + check + test + validate
+pnpm --filter server db:migrate     # apply Prisma migrations
+pnpm --filter server db:seed        # seed the database
+pnpm --filter server word-book:import # import the ECDICT word books
+pnpm --filter server test           # vitest
+pnpm --filter server ci             # build + check + test + validate
 ```
 
 ## Layout

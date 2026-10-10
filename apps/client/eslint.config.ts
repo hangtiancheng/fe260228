@@ -1,4 +1,3 @@
-// DO NOT MODIFY
 import js from "@eslint/js";
 import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
@@ -41,7 +40,6 @@ export default defineConfig([
       "@typescript-eslint/ban-ts-comment": "error",
       "@typescript-eslint/consistent-type-assertions": [
         "error",
-        // Runtime boundaries must use zod validation instead of type assertions.
         { assertionStyle: "never" },
       ],
       "@typescript-eslint/no-explicit-any": "error",

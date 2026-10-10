@@ -35,7 +35,6 @@ describe("createAppRoot", () => {
       render(<AppRoot />);
 
       expect(
-        // MUST `fe260228`
         await screen.findByRole("main", { name: "fe260228" }),
       ).toBeInTheDocument();
     },
