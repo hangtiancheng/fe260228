@@ -27,10 +27,14 @@ export class WordBookImportWorker {
 	private nextRequestId = 1;
 
 	constructor() {
-		this.worker = new Worker(
-			new URL("./word-book-import-worker.ts", import.meta.url),
-			{ execArgv: ["--import", "tsx"] },
-		);
+		const runsFromTypeScript = import.meta.url.endsWith(".ts");
+		const workerFile = runsFromTypeScript
+			? "./word-book-import-worker.ts"
+			: "./word-book-import-worker.js";
+
+		this.worker = new Worker(new URL(workerFile, import.meta.url), {
+			execArgv: runsFromTypeScript ? ["--import", "tsx"] : [],
+		});
 		this.worker.on("message", (message: unknown) => {
 			this.handleMessage(message);
 		});
